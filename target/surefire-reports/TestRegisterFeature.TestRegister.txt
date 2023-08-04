@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: TestRegisterFeature.TestRegister
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.093 s <<< FAILURE! - in TestRegisterFeature.TestRegister
+testInvalidPassword  Time elapsed: 0.08 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <User details not valid> but was: <Medlife.validation.exception.InvalidUserException: User details not valid>
+	at TestRegisterFeature.TestRegister.testInvalidPassword(TestRegister.java:40)
+
