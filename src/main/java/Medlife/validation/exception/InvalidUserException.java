@@ -1,5 +1,6 @@
 package Medlife.validation.exception;
 
+
 public class InvalidUserException extends Exception {
 	/**
 	 * 

@@ -27,13 +27,13 @@ public class UserDAO {
 		Connection connection = getConnection();
 		
 		// Prepare SQL Statement
-		String insertQuery = "INSERT INTO user (username,phone_number,email,password) VALUES (?,?,?,?);";
+		String insertQuery = "INSERT INTO user (userID,username,phone_number,email,password) VALUES (?,?,?,?,?);";
 		PreparedStatement pst = connection.prepareStatement(insertQuery);
-		
-		pst.setString(1, user.getUsername());
-		pst.setString(2, user.getMobile_number());
-		pst.setString(3, user.getEmail());
-		pst.setString(4, user.getPassword());
+		pst.setInt(1, user.getUserID());;
+		pst.setString(2, user.getUsername());
+		pst.setString(3, user.getMobile_number());
+		pst.setString(4, user.getEmail());
+		pst.setString(5, user.getPassword());
 		//Execute query
 		int rows = pst.executeUpdate();
 		

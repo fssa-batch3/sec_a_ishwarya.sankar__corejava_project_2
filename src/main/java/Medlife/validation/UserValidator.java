@@ -8,8 +8,6 @@ import Medlife.model.User;
 import Medlife.validation.exception.InvalidUserException;
 import Medlife.validation.exception.*;
 public class UserValidator {
-	
-	// if three conditions valid then user valid
 	public static boolean ValidateUser(User user) throws InvalidUserException {
 		if(user != null && validateName(user.getUsername()) && validateEmail(user.getEmail()) 
 				&& validatePassword(user.getPassword())) {
@@ -18,7 +16,7 @@ public class UserValidator {
 			throw new InvalidUserException("User details not valid");
 		}
 	}
-// 
+
 	public static boolean ValidateLoginUser(String email, String password) throws InvalidUserException {
 		if( email!=null&& password!=null&&validateEmail(email)&&validatePassword(password)) {	
 			return true;

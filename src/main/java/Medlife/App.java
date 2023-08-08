@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import Medlife.model.*;
 
 public class App {
-	
 
 
 }
