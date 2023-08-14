@@ -6,7 +6,16 @@ public class Medicine {
 	private int userID;
 	private String MedicineUrl;
 
-	
+	public Medicine(String medicineName ,int medicineRupees,int userID) {
+		this.MedicineName = medicineName;
+		this.MedicineRupees = medicineRupees;
+		this.userID = userID;
+		
+	}
+	//delete 
+	public Medicine(int userID) {
+		this.userID = userID;
+	}
 	
 	public Medicine(String medicineUrl) {
 		super();
@@ -20,8 +29,8 @@ public class Medicine {
 	}
 	public Medicine(String medicineName, int medicineRupees) {
 		super();
-		MedicineName = medicineName;
-		MedicineRupees = medicineRupees;
+		this.MedicineName = medicineName;
+		this.MedicineRupees = medicineRupees;
 	}
 	@Override
 	public String toString() {
@@ -30,10 +39,7 @@ public class Medicine {
 				+ ", getMedicineName()=" + getMedicineName() + ", getClass()=" + getClass() + ", hashCode()="
 				+ hashCode() + ", toString()=" + super.toString() + "]";
 	}
-	public Medicine(int userID) {
-		super();
-		this.userID = userID;
-	}
+	
 	public int getUserID() {
 		return userID;
 	}
