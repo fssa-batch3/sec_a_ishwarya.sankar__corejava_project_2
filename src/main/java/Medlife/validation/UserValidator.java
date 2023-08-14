@@ -9,7 +9,7 @@ import Medlife.validation.exception.InvalidUserException;
 import Medlife.validation.exception.*;
 public class UserValidator {
 	public static boolean ValidateUser(User user) throws InvalidUserException {
-		if(user != null && validateName(user.getUsername()) && validateEmail(user.getEmail()) 
+		if(user != null && validateName(user.getUsername()) && validateEmail(user.getEmail())  && validatePhoneNumber(user.getPhone_number())
 				&& validatePassword(user.getPassword())) {
 			return true;
 		} else {
@@ -77,4 +77,20 @@ public class UserValidator {
 		return isMatch;
 
     }
+	public static boolean validatePhoneNumber(String phoneNumber) {
+	    boolean match = false;
+	    try {
+	        String patternString = "^(\\+\\d{1,3})?\\s?\\(?(\\d{3})\\)?[-.\\s]?\\d{3}[-.\\s]?\\d{4}$";
+	        match = Pattern.matches(patternString, phoneNumber);
+	        if (match) {
+	            System.out.println("Valid phone number.");
+	        } else {
+	            System.out.println("Invalid phone number.");
+	        }
+	    } catch (PatternSyntaxException e) {
+	        System.out.println("Phone number pattern is not valid.");
+	    }
+
+	    return match;
+	}
 }

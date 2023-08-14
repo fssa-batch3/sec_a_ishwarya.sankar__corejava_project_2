@@ -55,7 +55,7 @@ public class TestRegisterFeature {
 	@Test
 	public void testValidUserRegistration() {
 		  
-	    User user1 = new User(4, "isu123@gmail.com", "Ishwarya", "Ishu@123", "8072404562", "user");
+	    User user1 = new User(1, "navee123@gmail.com", "Naveena", "Ishu@123", "9940947444", "doctor", false);
 	    UserService userService = new UserService();
 	    
 	    try {
