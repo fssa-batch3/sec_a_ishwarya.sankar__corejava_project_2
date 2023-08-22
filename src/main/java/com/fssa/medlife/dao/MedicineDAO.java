@@ -1,4 +1,5 @@
 package com.fssa.medlife.dao;
+
 import java.sql.Connection;
 
 import java.sql.DriverManager;
@@ -8,110 +9,214 @@ import java.sql.SQLException;
 
 import java.util.*;
 
+import com.fssa.medlife.exception.DAOException;
+import com.fssa.medlife.exception.ValidatorException;
 import com.fssa.medlife.model.Medicine;
 
 public class MedicineDAO {
-	
-	 //connect to database
-		public Connection getConnection() throws SQLException {
-		 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/backend", "root","123456");
-		 return connection;
-		}
-		
-		//add new user to DB - medicine
-		public boolean addMedicine(Medicine medicine) throws SQLException {
-	        String query = "INSERT INTO medicine (medicine_name, medicine_rupees) VALUES (?, ?)";
-	        
-	        try (Connection connection = getConnection(); PreparedStatement pmt = connection.prepareStatement(query)) {
-	            pmt.setString(1, medicine.getMedicineName());
-	            pmt.setInt(2, medicine.getMedicineRupees());
-	            //pmt.setInt(3, medicine.getUserID());
-//	            pmt.setString(3, medicine.getMedicineUrl());
-	            
-	            int rows = pmt.executeUpdate();
-	            return rows == 1;
-	        }
-	    }
-	
-		
-	
-		public List<Medicine> listMedicines() throws SQLException {
-		    List<Medicine> medicines = new ArrayList<>();
-		    String query = "SELECT * FROM Medicine";
-		    try (Connection connection = getConnection();
-		         PreparedStatement pstmt = connection.prepareStatement(query);
-		         ResultSet resultSet = pstmt.executeQuery()) {
-		        while (resultSet.next()) {
-		            int medicineId = resultSet.getInt("id");
-		            String medicineName = resultSet.getString("medicine_name");
-		            int medicineRupees = resultSet.getInt("medicine_rupees");
-		            String medicineUrl = resultSet.getString("medicine_url");
-		            // Add other fields as needed
-		            
-		            Medicine medicine = new Medicine(medicineId);
-		            medicines.add(medicine);
-		        }
-		        return medicines;
-		    }
-		}
-		
-		//update medicine 
-		public boolean updateMedicine(Medicine medicine) throws SQLException {
-			//Get Connection
-			Connection connection = getConnection();
-			
-			// Prepare SQL Statement
-			String insertQuery = "Update Medicine SET medicine_name=? , medicine_rupees=?  WHERE id=?;";
-			PreparedStatement pst = connection.prepareStatement(insertQuery);
 
-			pst.setString(1, medicine.getMedicineName());
-			pst.setInt(2, medicine.getMedicineRupees());
-			pst.setInt(3, medicine.getUserID());
-			//Execute query
-			int rows = pst.executeUpdate();
-			
-			//Return Successful or not
-			return (rows == 1);
-		}
-		// read 
-		public Medicine readMedicine(int medicineId) throws SQLException {
-		    Connection connection = getConnection();
-		    String selectQuery = "SELECT medicine_name, medicine_rupees FROM Medicine WHERE id = ?";
-		    
-		    try (PreparedStatement pst = connection.prepareStatement(selectQuery)) {
-		        pst.setInt(1, medicineId);
-		        
-		        try (ResultSet rs = pst.executeQuery()) {
-		            if (rs.next()) {
-		                Medicine medicine = new Medicine(medicineId);
-		               
-		                medicine.setMedicineName(rs.getString("medicine_name"));
-		                medicine.setMedicineRupees(rs.getInt("medicine_rupees"));
-		                // Set other medicine details as needed
-		                
-		                return medicine;
-		            } else {
-		                return null; // Medicine not found
-		            }
-		        }
-		    }
-		}
+	// connect to database
+	public Connection getConnection() throws SQLException {
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/backend", "root", "123456");
+		return connection;
+	}
 
+	public static void close(Connection connection, PreparedStatement ps) throws DAOException {
+		try {
+			if (ps != null) {
+				ps.close();
+			}
+			if (connection != null) {
+				connection.close();
+			}
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
+	//checking each  for null and closing it if it's not null and throws exception
+	public static void closeAll(Connection connection, PreparedStatement ps, ResultSet rs) throws DAOException {
+		try {
+			if (rs != null) {
+				rs.close();
+			}
+			if (ps != null) {
+				ps.close();
+			}
+			if (connection != null) {
+				connection.close();
+			}
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
+
+	// add new user to DB - medicine
+	public void addMedicine(Medicine medicine) throws DAOException {
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			String query = "INSERT INTO medicine (medicine_name, medicine_rupees,user_id,medicine_url) VALUES (?, ?, ?, ?)";
+			con = getConnection();
+			ps = con.prepareStatement(query);
+			ps.setString(1, medicine.getMedicineName());
+			ps.setInt(2, medicine.getMedicineRupees());
+			ps.setInt(3, medicine.getUserID());
+			ps.setString(4, medicine.getMedicineUrl());
+			ps.executeUpdate();
+			System.out.println("Medicine has been created successfully");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new DAOException(e);
+		} finally {
+			close(con,ps);
+		}
+	}
+
+	public void checkMedicineName(String medicineName) throws ValidatorException, DAOException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			String query = "SELECT* FROM medicines WHERE medicine_name = ?";
+			con = getConnection();
+			ps = con.prepareStatement(query);
+			ps.setString(1, medicineName);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				throw new ValidatorException("Medicine already exists");
+			}
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new DAOException(e);
+		} finally {
+			closeAll(con,ps, rs);
+		}
+	}
+	
+
+	public void updateMedicine(int id, Medicine medicine) throws DAOException {
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			String query = "UPDATE medicine SET medicine_name = ?, medicine_rupees = ?, user_id = ?, medicine_url = ? WHERE id = ?";
+			con = getConnection();
+			ps = con.prepareStatement(query);
+			ps.setString(1, medicine.getMedicineName());
+			ps.setInt(2, medicine.getMedicineRupees());
+			ps.setInt(3, medicine.getUserID());
+			ps.setString(4, medicine.getMedicineUrl());
+			ps.setInt(5, id);
+			ps.executeUpdate();
+			System.out.println("Medicine has been updated successfully");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new DAOException(e);
+		} finally {
+			close(con,ps);
+		}
+	}
+	public void checkMedicineIdExists(int id) throws ValidatorException, DAOException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			String query = "SELECT id FROM user WHERE id = ?";
+			con = getConnection();
+			ps = con.prepareStatement(query);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			if (!rs.next()) {
+				throw new ValidatorException("Medicine Id doesn't exists");
+			}
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new DAOException(e);
+		} finally {
+			closeAll(con,ps, rs);
+		}
+	}
+	
+	public void deleteMedicine(int id) throws DAOException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		
-		//delete 
-		public boolean deleteMedicine(Medicine medicine) throws SQLException {
-			//Get Connection
-			Connection connection = getConnection();
-			
-			// Prepare SQL Statement
-			String insertQuery = "Delete from Medicine WHERE id=?;";
-			PreparedStatement pst = connection.prepareStatement(insertQuery);
-
-			pst.setInt(1, medicine.getUserID());
-			//Execute query
-		int rows = pst.executeUpdate();
-			
-			//Return Successful or not
-			return (rows == 1);
+		try {
+			String query = "UPDATE medicine SET is_active = false WHERE is_active = 0 AND id = ?";
+			con = getConnection();
+			ps = con.prepareStatement(query);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			System.out.println("Medicine has been deleted successfully");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new DAOException(e);
+		} finally {
+			close(con,ps);
 		}
+	}
+	
+	public Set<Medicine> findAllMedicine() throws DAOException{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Set<Medicine> medicineList = new HashSet<>();
+		try {
+			String query = "SELECT * FROM medicine";
+			conn = getConnection();
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Medicine med = new Medicine();
+				med.setId(rs.getInt("id"));
+				med.setMedicineName(rs.getString("medicine_name"));
+				med.setMedicineRupees(rs.getInt("medicine_rupees"));
+				med.setMedicineUrl(rs.getString("medicine_url"));
+				med.setUserID(rs.getInt("user_id"));
+				medicineList.add(med);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new DAOException(e);
+		} finally {
+			closeAll(conn, ps, rs);
+		}
+		return medicineList;
+	}
+	
+	public Medicine findById(int id) throws DAOException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Medicine med = null;
+		
+		//rs.next()). If true, it means a medicine with the given id was found.
+		//If no matching medicine is found, the med object remains null.
+		try {
+			String query = "SELECT * FROM medicine WHERE is_active = 1 AND id = ?";
+			conn = getConnection();
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				med = new Medicine();
+				med.setId(rs.getInt("id"));
+				med.setMedicineName(rs.getString("medicine_name"));
+				med.setMedicineRupees(rs.getInt("medicine_rupees"));
+				med.setMedicineUrl(rs.getString("medicine_url"));
+				med.setUserID(rs.getInt("user_id"));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new DAOException(e);
+		} finally {
+			closeAll(conn, ps, rs);
+		}
+		return med;
+	}
+	//Finally, the med object, which may contain the retrieved medicine data or be null, is returned.
 }

@@ -65,9 +65,10 @@ public class  UserService {
 			UserValidator.validateUser(user);
 			return userDAO.updateUser(user);
 		} catch (InvalidUserException | SQLException e) {
-			throw new ServiceException(e)
+			throw new ServiceException(e);
 		}
 	
+	}
 	
 		public boolean deleteUser(User user) throws ServiceException {
 	        UserDAO userDAO = new UserDAO();

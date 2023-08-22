@@ -1,73 +1,69 @@
 package com.fssa.medlife.service;
 
-import java.sql.SQLException;
-import java.util.function.BooleanSupplier;
-
+import java.util.Set;
 import com.fssa.medlife.dao.MedicineDAO;
+import com.fssa.medlife.exception.DAOException;
+import com.fssa.medlife.exception.ValidatorException;
 import com.fssa.medlife.model.Medicine;
 import com.fssa.medlife.service.exception.ServiceException;
 import com.fssa.medlife.validation.MedicineValidator;
 
-import exception.InvalidMedicineException;
-
 public class MedicineService {
-	private MedicineDAO medicineDAO = new MedicineDAO();
-
-    public boolean addMedicine(Medicine medicine) throws ServiceException, SQLException {
-        try {
-
-            MedicineValidator.validateMedicine(medicine);
-            return medicineDAO.addMedicine(medicine);
-        } catch (InvalidMedicineException e) {
-            throw new ServiceException(e);
-        }
-    }
-
 	
-	// read
-	
-		// update 
-		public static boolean updateMedicine(Medicine medicine) throws ServiceException {
-			MedicineDAO medicineDAO = new MedicineDAO();
-			try {
-			if(MedicineValidator.validateMedicineName(medicine.getMedicineName())) { 
-				if(medicineDAO.updateMedicine(medicine)) {
-					System.out.println(medicine.getMedicineName() + " Successfully Updated!");
-					return true;
-				} else {
-					System.out.println("Not successful Updated!");
-					return false;
-				}
-			} else {
-				return false;
-			}
-			} catch ( SQLException | InvalidMedicineException e) {
-				throw new ServiceException(e);
-			}
-			
-		}
-		
-		// DELETE
-		public static boolean deleteMedicine(Medicine medicine) throws ServiceException {
-			MedicineDAO medicineDAO = new MedicineDAO();
-			try {
-				if(medicineDAO.deleteMedicine(medicine)) {
-					System.out.println(" Successfully Deleted!");
-					return true;
-				} else {
-					System.out.println("Not successful Updated!");
-					return false;
-				}
-			} catch ( SQLException e) {
-				throw new ServiceException(e);
-			}
-			
+	public void addMedicine(Medicine medicine) throws DAOException, ValidatorException {
+		MedicineDAO medicineDAO = new MedicineDAO();
+			MedicineValidator.validateMedicine(medicine);
+			medicineDAO.checkMedicineName(medicine.getMedicineName());
+			medicineDAO.addMedicine(medicine);
+
+	}
+
+	// update
+	public static void updateMedicine(int id, Medicine medicine) throws DAOException, ServiceException{
+		MedicineDAO medicineDAO = new MedicineDAO();
+		try {
+			MedicineValidator.validateMedicine(medicine);
+			MedicineDAO meddao = new MedicineDAO();
+			meddao.checkMedicineIdExists(id);
+			meddao.updateMedicine(id,medicine);
+		} catch (ValidatorException e) {
+			throw new ServiceException(e);
 		}
 
+	}
 
-		public BooleanSupplier updateMedicine(Medicine medicine1, String string, int i) {
-			// TODO Auto-generated method stub
-			return null;
+	// DELETE
+	public static void deleteMedicine(int id) throws DAOException, ServiceException{
+		MedicineDAO medicineDAO = new MedicineDAO();
+		try {
+			MedicineValidator.validateId(id);
+			medicineDAO.checkMedicineIdExists(id);
+			medicineDAO.deleteMedicine(id);
+		} catch (ValidatorException e) {
+			throw new ServiceException(e);
 		}
-		 
+
+	}
+
+	//READ
+	public Set<Medicine> getAll() throws DAOException {
+		MedicineDAO medicineDAO = new MedicineDAO();
+		Set<Medicine> medList = medicineDAO.findAllMedicine();
+		for (Medicine med : medList) {
+			System.out.println(med);
+		}
+		return medList;
+	}
+
+	public static Medicine findById(int id) throws ServiceException, DAOException {
+		try {
+		MedicineValidator.validateId(id);
+		MedicineDAO medicineDAO = new MedicineDAO();
+		medicineDAO.checkMedicineIdExists(id);
+		return medicineDAO.findById(id);
+		}catch (ValidatorException e) {
+			throw new ServiceException(e);
+		}
+	}
+
 }

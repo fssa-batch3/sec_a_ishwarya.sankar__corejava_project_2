@@ -16,14 +16,9 @@ public class TestMedicineFeature {
 
     private MedicineService medicineService;
 
-    @BeforeEach
-    public void setUp() {
-        medicineService = new MedicineService();
-    }
-
     @Test
     void testAddMedicineSuccess() {
-        Medicine medicine = new Medicine("MedicineName", 100,1);
+        Medicine medicine = new Medicine("Medicine", 100,1);
         try {
             assertTrue(medicineService.addMedicine(medicine));
         } catch (ServiceException | SQLException e) {
