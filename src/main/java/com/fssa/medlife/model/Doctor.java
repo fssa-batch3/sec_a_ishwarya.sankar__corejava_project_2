@@ -20,7 +20,11 @@ public class Doctor {
 		this.image = image;
 	}
 
-  @Override
+  public Doctor() {
+	// TODO Auto-generated constructor stub
+}
+
+@Override
 public String toString() {
 	return "Doctor [doctorname=" + doctorname + ", specialist=" + specialist + ", availability=" + availability
 			+ ", Experience=" + Experience + ", image=" + image + ", getDoctorname()=" + getDoctorname()

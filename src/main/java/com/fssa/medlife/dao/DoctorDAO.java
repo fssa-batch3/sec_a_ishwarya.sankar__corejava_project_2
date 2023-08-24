@@ -50,8 +50,8 @@ public class DoctorDAO {
 	
 	
 	
-	// read
-	public void addDoctor(Doctor doctor) throws DAOException {
+//create doctor
+	public void CreateDoctor(Doctor doctor) throws DAOException {
 		Connection con = null;
 		PreparedStatement ps = null;
 
@@ -73,5 +73,92 @@ public class DoctorDAO {
 			close(con,ps);
 		}
 	}
+	
+	
+	//read doctor
+	
+	public List<Doctor> listDoctors() throws DAOException {
+	    List<Doctor> doctors = new ArrayList<>();
+	    Connection con = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
 
+	    try {
+	        String query = "SELECT * FROM doctor";
+	        con = getConnection();
+	        ps = con.prepareStatement(query);
+	        rs = ps.executeQuery();
+
+	        while (rs.next()) {
+	            Doctor doctor = new Doctor();
+	            doctor.setDoctorname(rs.getString("doctor_name"));
+	            doctor.setSpecialist(rs.getString("specialist"));
+	            doctor.setAvailability(rs.getInt("availability"));
+	            doctor.setExperience(rs.getInt("Experience"));
+	            doctor.setImage(rs.getString("image"));
+	            doctors.add(doctor);
+	        }
+
+	        return doctors;
+	    } catch (SQLException e) {
+	        System.out.println(e.getMessage());
+	        throw new DAOException(e);
+	    } finally {
+	        closeAll(con, ps, rs);
+	    }
+	}
+	
+	// update
+	public void updateDoctor(Doctor doctor) throws DAOException {
+	    Connection con = null;
+	    PreparedStatement ps = null;
+
+	    try {
+	        String query = "UPDATE doctor SET specialist=?, availability=?, Experience=?, image=? WHERE doctor_name=?";
+	        con = getConnection();
+	        ps = con.prepareStatement(query);
+	        ps.setString(1, doctor.getSpecialist());
+	        ps.setInt(2, doctor.getAvailability());
+	        ps.setInt(3, doctor.getExperience());
+	        ps.setString(4, doctor.getImage());
+	        ps.setString(5, doctor.getDoctorname());
+	        int rowsAffected = ps.executeUpdate();
+
+	        if (rowsAffected > 0) {
+	            System.out.println("Doctor information has been updated successfully");
+	        } else {
+	            System.out.println("No records were updated");
+	        }
+	    } catch (SQLException e) {
+	        System.out.println(e.getMessage());
+	        throw new DAOException(e);
+	    } finally {
+	        close(con, ps);
+	    }
+	}
+	//delete
+	public void deleteDoctor(String doctorName) throws DAOException {
+	    Connection con = null;
+	    PreparedStatement ps = null;
+
+	    try {
+	        String query = "DELETE FROM doctor WHERE doctor_name=?";
+	        con = getConnection();
+	        ps = con.prepareStatement(query);
+	        ps.setString(1, doctorName);
+	        int rowsAffected = ps.executeUpdate();
+
+	        if (rowsAffected > 0) {
+	            System.out.println("Doctor record has been deleted successfully");
+	        } else {
+	            System.out.println("No records were deleted");
+	        }
+	    } catch (SQLException e) {
+	        System.out.println(e.getMessage());
+	        throw new DAOException(e);
+	    } finally {
+	        close(con, ps);
+	    }
+	}
+	
 }
