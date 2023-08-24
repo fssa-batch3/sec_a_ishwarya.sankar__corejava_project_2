@@ -10,6 +10,7 @@ import com.fssa.medlife.exception.ValidatorException;
 import com.fssa.medlife.model.Medicine;
 import com.fssa.medlife.service.exception.ServiceException;
 
+
 class TestMedicineUpdateFeature {
     @Test
     void testUpdateMedicine() throws ServiceException, DAOException {
@@ -18,12 +19,12 @@ class TestMedicineUpdateFeature {
         updatedMedicine.setMedicineName("Updated Medicine Name");
         updatedMedicine.setMedicineRupees(100);
         updatedMedicine.setMedicineUrl("https://example.com/updated-medicine");
-        updatedMedicine.setUserID(1);
 
         assertDoesNotThrow(() -> {
-            medicineService.updateMedicine(1, updatedMedicine);
+            medicineService.updateMedicine(3, updatedMedicine);
         });
     }
+    
     
     
     @Test
@@ -32,11 +33,10 @@ class TestMedicineUpdateFeature {
         Medicine updatedMedicine = new Medicine();
         updatedMedicine.setMedicineName("Updated Paracetamol");
         updatedMedicine.setMedicineRupees(75);
-        updatedMedicine.setUserID(2);
         updatedMedicine.setMedicineUrl("https://example.com/updated-paracetamol");
         
         assertDoesNotThrow(() -> {
-            medicineService.updateMedicine(1, updatedMedicine);
+            medicineService.updateMedicine(3, updatedMedicine);
         });
     }
 

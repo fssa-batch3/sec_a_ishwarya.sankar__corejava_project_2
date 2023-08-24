@@ -25,6 +25,7 @@ import com.fssa.medlife.validation.*;
             e.printStackTrace();
         }
     }
+    
 
     @Test
      void testUpdateEmailNotFound() throws SQLException {

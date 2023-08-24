@@ -14,6 +14,7 @@ public class UserDAO {
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/backend", "root", "123456");
     }
 
+    
 	// Add new user to DB - Register
 	public boolean register(User user) throws SQLException {
 
@@ -74,4 +75,5 @@ public class UserDAO {
 		}
 	}
 
+	
 }

@@ -10,6 +10,7 @@ public class User {
 	private boolean isDeleted;
 	
 	
+	
 	public User(int userId, String email, String username, String password, String phonenumber, String type,
 			boolean isDeleted) {
 		super();
@@ -41,6 +42,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
+	
 
 
 	public User(String email, boolean isDeleted) {

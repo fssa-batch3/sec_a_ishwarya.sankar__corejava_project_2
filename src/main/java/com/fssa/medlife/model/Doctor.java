@@ -12,6 +12,7 @@ public class Doctor {
 	//constructor
   public Doctor(String doctorname, String specialist, int availability, int experience, String image) {
 		super();
+		
 		this.doctorname = doctorname;
 		this.specialist = specialist;
 		this.availability = availability;

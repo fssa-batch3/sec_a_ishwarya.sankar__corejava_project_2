@@ -13,6 +13,7 @@ import exception.InvalidUserException;
 
 
 public class  UserService {
+	
 
 	public boolean registerUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();

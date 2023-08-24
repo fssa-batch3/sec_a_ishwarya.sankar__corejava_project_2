@@ -10,6 +10,7 @@ import com.fssa.medlife.exception.*;
 import com.fssa.medlife.model.*;
 import com.fssa.medlife.service.exception.ServiceException;
 
+
 public class TestUserLoginFeature {
 
     @Test

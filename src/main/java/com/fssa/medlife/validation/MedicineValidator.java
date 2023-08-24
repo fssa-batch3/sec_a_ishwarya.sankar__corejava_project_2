@@ -4,6 +4,7 @@ import com.fssa.medlife.exception.ValidatorException;
 import com.fssa.medlife.model.Medicine;
 
 public class MedicineValidator {
+	
 	private static final String NAME_PATTERN = "^[A-Za-z\\s]{3,}$";
 //validates a Medicine object. If the provided medicine object is null, it throws a ValidatorException
 	public static void validateMedicine(Medicine medicine) throws ValidatorException {
@@ -25,10 +26,11 @@ public class MedicineValidator {
 			throw new ValidatorException("Medicine Name should only contain alphabetic characters");
 		}
 
+		
 	}
 
-	public static void validateMedicineRupees(int medicineRupees) throws ValidatorException{
-		if (medicineRupees <= 0) {
+	public static void validateMedicineRupees(double d) throws ValidatorException{
+		if (d <= 0) {
 			throw new ValidatorException("Medicine rupees can not be zero or less than zero");
 		}
 	}

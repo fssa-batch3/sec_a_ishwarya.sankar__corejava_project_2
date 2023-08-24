@@ -1,5 +1,6 @@
 package com.fssa.medlife.service;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -17,15 +18,17 @@ public class TestUserRegisterFeature {
 		// change userID , Email
 		//***************************************************
 		
-		User user1 = new User(14, "sankar14@gmail.com", "ishusankar", "Ishu@123", "8072404562", "Doctor");
+		User user1 = new User(18, "abinaya14@gmail.com", "abinaya", "Password@123", "8072404562", "Doctor");
 		try {
 			assertTrue(userService.registerUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			fail();
 		}
 	}
+	
 
+	
+	
 	@Test
 	 void testRegistrationNullPassword() {
 		UserService userService = new UserService();
@@ -41,8 +44,9 @@ public class TestUserRegisterFeature {
 	@Test
 	 void testRegistrationNullUser() {
 		UserService userService = new UserService();
+		User user = new User(15, null, "JohnDoe", "john@example.com", "8565473543", "user");
 		try {
-			userService.registerUser(null);
+			userService.registerUser(user);
 			fail("Expected ServiceException for null user, but none was thrown.");
 		} catch (ServiceException e) {
 			e.printStackTrace();

@@ -13,7 +13,9 @@ import com.fssa.medlife.exception.DAOException;
 import com.fssa.medlife.exception.ValidatorException;
 import com.fssa.medlife.model.Medicine;
 
+
 public class MedicineDAO {
+	
 
 	// connect to database
 	public Connection getConnection() throws SQLException {
@@ -123,7 +125,7 @@ public class MedicineDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			String query = "SELECT id FROM user WHERE id = ?";
+			String query = "SELECT id FROM medicine WHERE id = ?";
 			con = getConnection();
 			ps = con.prepareStatement(query);
 			ps.setInt(1, id);
@@ -140,18 +142,17 @@ public class MedicineDAO {
 		}
 	}
 	
-	public void deleteMedicine(int id) throws DAOException {
+	public boolean deleteMedicine(int id) throws DAOException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		ResultSet rs = null;
 		
 		try {
-			String query = "UPDATE medicine SET is_active = false WHERE is_active = 0 AND id = ?";
+			String query = "UPDATE medicine SET is_deleted=1 WHERE id=?";
 			con = getConnection();
 			ps = con.prepareStatement(query);
 			ps.setInt(1, id);
-			rs = ps.executeQuery();
-			System.out.println("Medicine has been deleted successfully");
+			int rows = ps.executeUpdate();
+			return (rows == 1);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			throw new DAOException(e);
@@ -160,11 +161,11 @@ public class MedicineDAO {
 		}
 	}
 	
-	public Set<Medicine> findAllMedicine() throws DAOException{
+	public List<Medicine> findAllMedicine() throws DAOException{
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Set<Medicine> medicineList = new HashSet<>();
+		List<Medicine> medicineList = new ArrayList<>();
 		try {
 			String query = "SELECT * FROM medicine";
 			conn = getConnection();
@@ -187,36 +188,13 @@ public class MedicineDAO {
 		}
 		return medicineList;
 	}
-	
-	public Medicine findById(int id) throws DAOException {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		Medicine med = null;
-		
-		//rs.next()). If true, it means a medicine with the given id was found.
-		//If no matching medicine is found, the med object remains null.
-		try {
-			String query = "SELECT * FROM medicine WHERE is_active = 1 AND id = ?";
-			conn = getConnection();
-			ps = conn.prepareStatement(query);
-			ps.setInt(1, id);
-			rs = ps.executeQuery();
-			if (rs.next()) {
-				med = new Medicine();
-				med.setId(rs.getInt("id"));
-				med.setMedicineName(rs.getString("medicine_name"));
-				med.setMedicineRupees(rs.getInt("medicine_rupees"));
-				med.setMedicineUrl(rs.getString("medicine_url"));
-				med.setUserID(rs.getInt("user_id"));
-			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			throw new DAOException(e);
-		} finally {
-			closeAll(conn, ps, rs);
-		}
-		return med;
+
+	public Medicine findById(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+	
+	
+	
 	//Finally, the med object, which may contain the retrieved medicine data or be null, is returned.
 }

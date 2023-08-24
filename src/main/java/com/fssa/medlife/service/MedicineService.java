@@ -1,5 +1,6 @@
 package com.fssa.medlife.service;
 
+import java.util.List;
 import java.util.Set;
 import com.fssa.medlife.dao.MedicineDAO;
 import com.fssa.medlife.exception.DAOException;
@@ -18,6 +19,7 @@ public class MedicineService {
 
 	}
 
+	
 	// update
 	public static void updateMedicine(int id, Medicine medicine) throws DAOException, ServiceException{
 		MedicineDAO medicineDAO = new MedicineDAO();
@@ -33,12 +35,11 @@ public class MedicineService {
 	}
 
 	// DELETE
-	public static void deleteMedicine(int id) throws DAOException, ServiceException{
+	public static boolean deleteMedicine(int id) throws DAOException, ServiceException{
 		MedicineDAO medicineDAO = new MedicineDAO();
 		try {
 			MedicineValidator.validateId(id);
-			medicineDAO.checkMedicineIdExists(id);
-			medicineDAO.deleteMedicine(id);
+			return medicineDAO.deleteMedicine(id);
 		} catch (ValidatorException e) {
 			throw new ServiceException(e);
 		}
@@ -46,14 +47,11 @@ public class MedicineService {
 	}
 
 	//READ
-	public Set<Medicine> getAll() throws DAOException {
+	public List<Medicine> getAll() throws DAOException {
 		MedicineDAO medicineDAO = new MedicineDAO();
-		Set<Medicine> medList = medicineDAO.findAllMedicine();
-		for (Medicine med : medList) {
-			System.out.println(med);
-		}
-		return medList;
+		 return medicineDAO.findAllMedicine();
 	}
+	
 
 	public static Medicine findById(int id) throws ServiceException, DAOException {
 		try {
@@ -64,6 +62,17 @@ public class MedicineService {
 		}catch (ValidatorException e) {
 			throw new ServiceException(e);
 		}
+	}
+	
+
+	public void deleteMedicine(Medicine medicineToDelete) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Set<Medicine> findAllMedicine() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

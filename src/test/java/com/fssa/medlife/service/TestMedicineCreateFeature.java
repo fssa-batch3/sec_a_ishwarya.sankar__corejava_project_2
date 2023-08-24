@@ -12,13 +12,16 @@ import com.fssa.medlife.exception.ValidatorException;
 import com.fssa.medlife.model.Medicine;
 
 public class TestMedicineCreateFeature {
+	
+	
 	 @Test
 	    void testCreateMedicineWithValidInput() {
 		   // Create an instance of the MedicineService class
 
 	        MedicineService medicineService = new MedicineService();
+	        // MODEL OF MEDICINE I CREATE AN OBJECT
 	        Medicine newMedicine = new Medicine();
-	        newMedicine.setMedicineName("Cough Syrup");
+	        newMedicine.setMedicineName("sas Syrup");
 	        newMedicine.setMedicineRupees(50);
 	        newMedicine.setUserID(4);
 	        newMedicine.setMedicineUrl("https://example.com/paracetamol");
@@ -30,6 +33,7 @@ public class TestMedicineCreateFeature {
 	        });
 	    }
 
+	 
 	    @Test
 	    void testCreateMedicineWithInvalidInput() {
 	    	//n instance of the MedicineService class is created. 
@@ -78,6 +82,4 @@ public class TestMedicineCreateFeature {
 	        String actualMessage = exception.getMessage();
 	        assertEquals(expectedMessage, actualMessage);
 	    }
-
-
 }

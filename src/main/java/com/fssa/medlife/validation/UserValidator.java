@@ -7,6 +7,7 @@ import com.fssa.medlife.model.User;
 
 import exception.InvalidUserException;
 
+
 public class UserValidator {
 	public static boolean validateUser(User user) throws InvalidUserException {
 		if (user != null && validateUserID(user.getUserId())&& validateName(user.getUsername()) && validatePassword(user.getPassword())
@@ -16,6 +17,7 @@ public class UserValidator {
 			throw new InvalidUserException("User details not valid");
 		}
 	}
+	
 
 	
 	

@@ -12,3 +12,4 @@ public class InvalidMedicineException extends Exception {
 		super(e);
 	}
 }
+
