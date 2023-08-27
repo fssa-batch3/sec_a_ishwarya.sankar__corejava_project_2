@@ -10,6 +10,7 @@ C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\sr
 C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\main\java\com\fssa\medlife\validation\UserValidator.java
 C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\main\java\com\fssa\medlife\service\MedicineService.java
 C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\main\java\exception\InvalidMedicineException.java
+C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\main\java\exception\InvalidDoctorException.java
 C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\main\java\exception\InvalidUserException.java
 C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\main\java\com\fssa\medlife\dao\MedicineDAO.java
 C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\main\java\com\fssa\medlife\model\User.java

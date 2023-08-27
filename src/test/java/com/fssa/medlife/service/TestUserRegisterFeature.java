@@ -10,15 +10,19 @@ import com.fssa.medlife.model.User;
 import com.fssa.medlife.service.exception.ServiceException;
 
 public class TestUserRegisterFeature {
+	
+	
+	//
 	@Test
 	 void testRegistrationSuccess() {
 		UserService userService = new UserService();
+		
 		// email is not repeating so give unique email
 		//********************** Important ******************
 		// change userID , Email
 		//***************************************************
 		
-		User user1 = new User(18, "abinaya14@gmail.com", "abinaya", "Password@123", "8072404562", "Doctor");
+		User user1 = new User(5, "abinaya14@gmail.com", "Abinaya", "Abi15@", "9940947444", "doctor");
 		try {
 			assertTrue(userService.registerUser(user1));
 		} catch (ServiceException e) {
@@ -26,9 +30,7 @@ public class TestUserRegisterFeature {
 		}
 	}
 	
-
-	
-	
+	//
 	@Test
 	 void testRegistrationNullPassword() {
 		UserService userService = new UserService();
@@ -40,7 +42,8 @@ public class TestUserRegisterFeature {
 			e.printStackTrace();
 		}
 	}
-
+	//
+	
 	@Test
 	 void testRegistrationNullUser() {
 		UserService userService = new UserService();
@@ -52,5 +55,6 @@ public class TestUserRegisterFeature {
 			e.printStackTrace();
 		}
 	}
-
+//
+	
 }

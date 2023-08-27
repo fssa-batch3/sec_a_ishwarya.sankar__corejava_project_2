@@ -11,8 +11,7 @@ import org.junit.jupiter.api.Test;
 import com.fssa.medlife.exception.ValidatorException;
 import com.fssa.medlife.model.Medicine;
 
-public class TestMedicineCreateFeature {
-	
+public class TestMedicineCreateFeature {	
 	
 	 @Test
 	    void testCreateMedicineWithValidInput() {
@@ -46,6 +45,7 @@ public class TestMedicineCreateFeature {
 	        assertEquals(expectedMessage, actualMessage);
 	    }
 	    
+	    
 	    @Test
 	    void testCreateMedicineWithNameNull() {
 	        MedicineService medicineService = new MedicineService();
@@ -61,12 +61,11 @@ public class TestMedicineCreateFeature {
 	            medicineService.addMedicine(newMedicine);
 	        });
 	        String expectedMessage = "Medicine Name cannot be null or empty";
-	        
 	        String actualMessage = exception.getMessage();
 	        //    // Use assertEquals to compare the expected and actual exception messages
 	        assertEquals(expectedMessage, actualMessage);
 	    }
-	    
+	
 	    @Test
 	    void testCreateMedicineWithNegativeRupees() {
 	        MedicineService medicineService = new MedicineService();
@@ -82,4 +81,5 @@ public class TestMedicineCreateFeature {
 	        String actualMessage = exception.getMessage();
 	        assertEquals(expectedMessage, actualMessage);
 	    }
+	    
 }

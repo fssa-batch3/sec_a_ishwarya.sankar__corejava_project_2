@@ -20,7 +20,7 @@ public class TestMedicineDeleteFeature {
 	        // Create an instance of the MedicineService class
 	        MedicineService medicineService = new MedicineService();
 	        // Create a sample medicine to be deleted
-	        int id = 3;
+	        int id = 29;
 	        // assertDoesNotThrow to test that no exceptions are thrown during this code block
             // This is the method being tested to see if it can delete a medicine without throwing an exception.
 	        assertTrue(MedicineService.deleteMedicine(id));

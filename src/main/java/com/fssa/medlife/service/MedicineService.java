@@ -1,5 +1,4 @@
 package com.fssa.medlife.service;
-
 import java.util.List;
 import java.util.Set;
 import com.fssa.medlife.dao.MedicineDAO;
@@ -8,7 +7,6 @@ import com.fssa.medlife.exception.ValidatorException;
 import com.fssa.medlife.model.Medicine;
 import com.fssa.medlife.service.exception.ServiceException;
 import com.fssa.medlife.validation.MedicineValidator;
-
 public class MedicineService {
 	
 	public void addMedicine(Medicine medicine) throws DAOException, ValidatorException {
@@ -17,9 +15,7 @@ public class MedicineService {
 			medicineDAO.checkMedicineName(medicine.getMedicineName());
 			medicineDAO.addMedicine(medicine);
 
-	}
-
-	
+	}	
 	// update
 	public static void updateMedicine(int id, Medicine medicine) throws DAOException, ServiceException{
 		MedicineDAO medicineDAO = new MedicineDAO();
@@ -33,7 +29,6 @@ public class MedicineService {
 		}
 
 	}
-
 	// DELETE
 	public static boolean deleteMedicine(int id) throws DAOException, ServiceException{
 		MedicineDAO medicineDAO = new MedicineDAO();
@@ -45,14 +40,11 @@ public class MedicineService {
 		}
 
 	}
-
 	//READ
 	public List<Medicine> getAll() throws DAOException {
 		MedicineDAO medicineDAO = new MedicineDAO();
 		 return medicineDAO.findAllMedicine();
 	}
-	
-
 	public static Medicine findById(int id) throws ServiceException, DAOException {
 		try {
 		MedicineValidator.validateId(id);

@@ -13,6 +13,7 @@ import com.fssa.medlife.model.Doctor;
 import com.fssa.medlife.model.Medicine;
 
 public class DoctorDAO {
+	
 	// connect to database
 	public Connection getConnection() throws SQLException {
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/backend", "root", "123456");

@@ -21,7 +21,7 @@ class TestMedicineUpdateFeature {
         updatedMedicine.setMedicineUrl("https://example.com/updated-medicine");
 
         assertDoesNotThrow(() -> {
-            medicineService.updateMedicine(3, updatedMedicine);
+            medicineService.updateMedicine(29, updatedMedicine);
         });
     }
     

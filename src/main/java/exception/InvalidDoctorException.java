@@ -1,5 +1,11 @@
 package exception;
 
-public class InvalidDoctorException {
+public class InvalidDoctorException extends Exception{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 }
