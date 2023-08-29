@@ -1,5 +1,9 @@
 package exception;
-
+/**
+ * 
+ * @author IshwaryaSankar
+ *
+ */
 public class InvalidUserException  extends Exception {
 
 	private static final long serialVersionUID = -1194860954774008955L;

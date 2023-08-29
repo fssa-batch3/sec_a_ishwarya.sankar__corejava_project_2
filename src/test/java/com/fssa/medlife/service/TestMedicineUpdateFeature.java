@@ -19,6 +19,7 @@ class TestMedicineUpdateFeature {
         updatedMedicine.setMedicineName("Updated Medicine Name");
         updatedMedicine.setMedicineRupees(100);
         updatedMedicine.setMedicineUrl("https://example.com/updated-medicine");
+        updatedMedicine.setUserID(4);
 
         assertDoesNotThrow(() -> {
             medicineService.updateMedicine(29, updatedMedicine);
@@ -33,6 +34,7 @@ class TestMedicineUpdateFeature {
         Medicine updatedMedicine = new Medicine();
         updatedMedicine.setMedicineName("Updated Paracetamol");
         updatedMedicine.setMedicineRupees(75);
+        updatedMedicine.setUserID(4);
         updatedMedicine.setMedicineUrl("https://example.com/updated-paracetamol");
         
         assertDoesNotThrow(() -> {
@@ -46,7 +48,7 @@ class TestMedicineUpdateFeature {
         Medicine updatedMedicine = new Medicine();
         // Invalid medicine details
         
-        assertThrows(ValidatorException.class, () -> {
+        assertThrows(ServiceException.class, () -> {
             medicineService.updateMedicine(1, updatedMedicine);
         });
     }

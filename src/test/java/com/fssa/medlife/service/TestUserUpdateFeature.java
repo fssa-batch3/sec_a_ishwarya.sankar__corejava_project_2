@@ -18,7 +18,7 @@ import com.fssa.medlife.validation.*;
     @Test
      void testUpdateSuccess() throws SQLException {
         UserService userService = new UserService();
-        User user1 = new User(3, "maha122@gmail.com", "Mahasenthil", "Naveena@123", "9888844056", "user", false);
+        User user1 = new User( "maha122@gmail.com", "Mahasenthil", "Naveena@123", "9888844056", "user", false);
         try {
             assertTrue(userService.updateUser(user1, "maha12@gmail.com"));
         } catch (ServiceException e) {
@@ -30,7 +30,7 @@ import com.fssa.medlife.validation.*;
     @Test
      void testUpdateEmailNotFound() throws SQLException {
         UserService userService = new UserService();
-        User user1 = new User(1, "maha12@gmail.com", "MahaKanmani", "Navee@123", "8072444056", "user", false);
+        User user1 = new User("maha12@gmail.com", "MahaKanmani", "Navee@123", "8072444056", "user", false);
         try {
             // Assuming the user with email "maha12@gmail.com" does not exist in the system
             userService.updateUser(user1, "noemail@gmail.com");
@@ -43,7 +43,7 @@ import com.fssa.medlife.validation.*;
     @Test
      void testUpdateInvalidEmailFormat() throws SQLException {
         UserService userService = new UserService();
-        User user1 = new User(1, "maha12@gmail.com", "MahaKanmani", "Navee@123", "8072444056", "user", false);
+        User user1 = new User("maha12@gmail.com", "MahaKanmani", "Navee@123", "8072444056", "user", false);
         try {
             // Assuming "invalid_email_format" is not a valid email format
             userService.updateUser(user1, "invalidemailformat");
@@ -57,7 +57,7 @@ import com.fssa.medlife.validation.*;
      void testUpdateMissingRequiredField() throws SQLException {
         UserService userService = new UserService();
         // Leaving the name field empty
-        User user1 = new User(1, "maha12@gmail.com", "", "Navee@123", "8072444056", "user", false);
+        User user1 = new User( "maha12@gmail.com", "", "Navee@123", "8072444056", "user", false);
         try {
             userService.updateUser(user1, "maha12@gmail.com");
             fail("Expected ServiceException for missing required field, but none was thrown.");

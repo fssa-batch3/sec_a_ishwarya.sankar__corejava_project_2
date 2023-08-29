@@ -22,7 +22,7 @@ public class TestUserRegisterFeature {
 		// change userID , Email
 		//***************************************************
 		
-		User user1 = new User(5, "abinaya14@gmail.com", "Abinaya", "Abi15@", "9940947444", "doctor");
+		User user1 = new User( "abinaya14@gmail.com", "Abinaya", "Abi15@", "9940947444", "doctor");
 		try {
 			assertTrue(userService.registerUser(user1));
 		} catch (ServiceException e) {
@@ -34,7 +34,7 @@ public class TestUserRegisterFeature {
 	@Test
 	 void testRegistrationNullPassword() {
 		UserService userService = new UserService();
-		User user = new User(15, "JohnDoe", null, "john@example.com", "8565473543", "user");
+		User user = new User( "JohnDoe", null, "john@example.com", "8565473543", "user");
 		try {
 			userService.registerUser(user);
 			fail("Expected ServiceException for null password, but none was thrown.");
@@ -47,7 +47,7 @@ public class TestUserRegisterFeature {
 	@Test
 	 void testRegistrationNullUser() {
 		UserService userService = new UserService();
-		User user = new User(15, null, "JohnDoe", "john@example.com", "8565473543", "user");
+		User user = new User( null, "JohnDoe", "john@example.com", "8565473543", "user");
 		try {
 			userService.registerUser(user);
 			fail("Expected ServiceException for null user, but none was thrown.");
