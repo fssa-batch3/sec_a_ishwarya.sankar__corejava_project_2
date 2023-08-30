@@ -53,7 +53,7 @@ public class MedicineDAO {
 	}
 
 	// add new user to DB - medicine
-	public void addMedicine(Medicine medicine) throws DAOException {
+	public boolean addMedicine(Medicine medicine) throws DAOException {
 		Connection con = null;
 		PreparedStatement ps = null;
 
@@ -73,6 +73,7 @@ public class MedicineDAO {
 		} finally {
 			close(con,ps);
 		}
+		return false;
 	}
 
 	public void checkMedicineName(String medicineName) throws ValidatorException, DAOException {
@@ -80,7 +81,7 @@ public class MedicineDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			String query = "SELECT* FROM medicines WHERE medicine_name = ?";
+			String query = "SELECT* FROM medicine WHERE medicine_name = ?";
 			con = getConnection();
 			ps = con.prepareStatement(query);
 			ps.setString(1, medicineName);

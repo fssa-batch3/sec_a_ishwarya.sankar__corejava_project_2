@@ -14,6 +14,7 @@ public class MedicineValidator {
 		validateMedicineName(medicine.getMedicineName());
 		validateMedicineRupees(medicine.getMedicineRupees());
 	}
+	
 
 	public static void validateMedicineName(String medicineName) throws ValidatorException {
 		if (medicineName == null || "".equals(medicineName.trim())) {

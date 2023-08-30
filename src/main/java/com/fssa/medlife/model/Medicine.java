@@ -11,6 +11,31 @@ public class Medicine {
 
 	
 
+	public Medicine(String medicineName2, String price, String url) {
+		// TODO Auto-generated constructor stub
+	}
+ 
+
+
+
+	public Medicine(String medicineName, int medicineRupees, int userID, String medicineUrl) {
+		super();
+		MedicineName = medicineName;
+		MedicineRupees = medicineRupees;
+		this.userID = userID;
+		MedicineUrl = medicineUrl;
+	}
+
+
+
+
+	public Medicine() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+
 	public int getId() {
 		return id;
 	}

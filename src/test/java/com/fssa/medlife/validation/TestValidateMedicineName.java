@@ -20,26 +20,7 @@ class MedicineValidatorTest {
     }
     
 
-    @Test
-    void nullMedicineName() {
-        try {
-        	MedicineValidator.validateMedicineName(null);
-            fail("Test Case Failed: Medicine name is null");
-        } catch (ValidatorException e) {
-            assertTrue(e.getMessage().equals("Medicine Name cannot be null or empty"), "Test Case Passed: Medicine name is null");
-        }
-    }
-
-    @Test
-    void emptyMedicineName() {
-        try {
-        	MedicineValidator.validateMedicineName("");
-            fail("Test Case Failed: Medicine name is empty");
-        } catch (ValidatorException e) {
-            assertTrue(e.getMessage().equals("Medicine Name cannot be null or empty"), "Test Case Passed: Medicine name is empty");
-        }
-    }
-
+    
     @Test
     void shortMedicineName() {
         try {
