@@ -3,6 +3,8 @@
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
 			<item value="C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2"/>
+			<item value="C:\Users\IshwaryaSankar\eclipse-workspace\medLife"/>
+			<item value="C:\Users\IshwaryaSankar\eclipse-workspace\mavenDemo"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
