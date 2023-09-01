@@ -12,19 +12,55 @@ import com.fssa.medlife.service.exception.ServiceException;
 
 class TestMedicineCreateFeature {
 
-	 @Test
-	    void testAddMedicineSuccess() {
-	        new MedicineService();
-	        Medicine medicine = new Medicine("dolog", 50, 4, "https://example.com/paracetamol");
-
+	  @Test
+	    public void testAddMedicineSuccess() {
+	        MedicineService medicineService = new MedicineService();
+	        Medicine medicine = new Medicine("Paracetemal", 100, "http://example.com");
+	        
 	        try {
-	            assertTrue(MedicineService.addMedicine(medicine));
-	            System.out.println("Medicine Addition Test Passed");
+	            assertTrue(medicineService.addMedicine(medicine));
 	        } catch (ServiceException e) {
 	            e.printStackTrace();
 	            fail();
 	        }
 	    }
-	 
-
+	    
+	    @Test
+	    public void testAddMedicineNullName() {
+	        MedicineService medicineService = new MedicineService();
+	        Medicine medicine = new Medicine(null, 100, "http://example.com");
+	        
+	        try {
+	            medicineService.addMedicine(medicine);
+	            fail();
+	        } catch (ServiceException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	    @Test
+	    public void testAddMedicineInvalidRupees() {
+	        MedicineService medicineService = new MedicineService();
+	        Medicine medicine = new Medicine("MedicineName", -10, "http://example.com");
+	        
+	        try {
+	            medicineService.addMedicine(medicine);
+	            fail();
+	        } catch (ServiceException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	    @Test
+	    public void testAddMedicineNullUrl() {
+	        MedicineService medicineService = new MedicineService();
+	        Medicine medicine = new Medicine("MedicineName", 100, null);
+	        
+	        try {
+	            medicineService.addMedicine(medicine);
+	            fail();
+	        } catch (ServiceException e) {
+	            e.printStackTrace();
+	        }
+	    }
 }

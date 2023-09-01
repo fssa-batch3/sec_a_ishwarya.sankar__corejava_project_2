@@ -22,10 +22,11 @@ public class TestUserRegisterFeature {
 		// change userID , Email
 		//***************************************************
 		
-		User user1 = new User( "abinaya14@gmail.com", "Abinaya", "Abi15@", "9940947444", "doctor");
+		User user1 = new User("abinaya29@gmail.com", "Abinaya", "Ishu@145", "9940947444", "doctor");
 		try {
 			assertTrue(userService.registerUser(user1));
 		} catch (ServiceException e) {
+			fail();
 			e.printStackTrace();
 		}
 	}

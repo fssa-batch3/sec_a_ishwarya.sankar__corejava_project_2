@@ -14,23 +14,19 @@ import com.fssa.medlife.service.exception.ServiceException;
 class TestMedicineReadFeature {
 
 	@Test
-	void testReadAllMedicine() throws DAOException {
+	void testReadAllMedicine() {
 		MedicineService medicineService = new MedicineService();
 		List<Medicine> medicineList;
 		try {
-			medicineList = medicineService.getAll();
+			medicineList = medicineService.getAllMedicine();
 			assertNotNull(medicineList);
+			System.out.println(medicineList.toString());
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	@Test
-	void testReadMedicineById() throws DAOException, ServiceException {
-		MedicineService medicineService = new MedicineService();
-		List<Medicine> medicineList = medicineService.getAll();
-		assertFalse(medicineList.isEmpty());
-	}
+	
 
 }

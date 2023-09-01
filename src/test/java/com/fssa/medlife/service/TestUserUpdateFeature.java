@@ -7,24 +7,30 @@ import java.sql.SQLException;
 
 import org.junit.jupiter.api.Test;
 
-import com.fssa.medlife.dao.*;
-import com.fssa.medlife.exception.*;
-import com.fssa.medlife.model.*;
+import com.fssa.medlife.model.User;
 import com.fssa.medlife.service.exception.ServiceException;
-import com.fssa.medlife.validation.*;
 
   public class TestUserUpdateFeature {
 
-    @Test
-     void testUpdateSuccess() throws SQLException {
-        UserService userService = new UserService();
-        User user1 = new User( "maha122@gmail.com", "Mahasenthil", "Naveena@123", "9888844056", "user", false);
-        try {
-            assertTrue(userService.updateUser(user1, "maha12@gmail.com"));
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
-    }
+	  @Test
+	    void testUpdateSuccess() {
+	        UserService userService = new UserService();
+	        
+	        // Create a User object with updated information
+	        User updatedUser = new User("abinaya21@gmail.com", "Updated Name", "UpdatedPassword", "9876543210", "updatedOccupation", false);
+	        
+	        try {
+	            // Call the updateUser method and check if it returns true
+	            assertTrue(userService.updateUser(updatedUser, "abinaya21@gmail.com"));
+	        } catch (ServiceException e) {
+	            // If an exception is thrown, fail the test
+	            e.printStackTrace();
+	            fail();
+	        }
+	    }
+	  
+
+
     
 
     @Test

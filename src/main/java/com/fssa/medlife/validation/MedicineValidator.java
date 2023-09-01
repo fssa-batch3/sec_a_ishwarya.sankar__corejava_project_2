@@ -1,50 +1,57 @@
 package com.fssa.medlife.validation;
 
-import com.fssa.medlife.exception.ValidatorException;
 import com.fssa.medlife.model.Medicine;
+
+import exception.InvalidMedicineException;
 
 public class MedicineValidator {
 	
-	private static final String NAME_PATTERN = "^[A-Za-z\\s]{3,}$";
-//validates a Medicine object. If the provided medicine object is null, it throws a ValidatorException
-	public static void validateMedicine(Medicine medicine) throws ValidatorException {
-		if (medicine == null) {
-			throw new ValidatorException("Medicine Object cannot be null");
-		}
-		validateMedicineName(medicine.getMedicineName());
-		validateMedicineRupees(medicine.getMedicineRupees());
-	}
-	
+	public static boolean validateMedicine(Medicine medicine) throws InvalidMedicineException {
+        if (medicine == null) {
+            throw new InvalidMedicineException("Medicine is null");
+        }
 
-	public static void validateMedicineName(String medicineName) throws ValidatorException {
-		if (medicineName == null || "".equals(medicineName.trim())) {
-			throw new ValidatorException("Medicine Name cannot be null or empty");
-		}
-		if (medicineName.length() < 3) {
-			throw new ValidatorException("Medicine Name should be at least 3 characters long");
-		}
-		if (!medicineName.matches(NAME_PATTERN)) {
-			throw new ValidatorException("Medicine Name should only contain alphabetic characters");
-		}
+        if (!validateMedicineName(medicine.getMedicineName())) {
+            throw new InvalidMedicineException("Medicine name is not valid");
+        }
 
-		
-	}
+        if (!validateMedicineRupees(medicine.getMedicineRupees())) {
+            throw new InvalidMedicineException("Medicine rupees are not valid");
+        }
 
-	public static void validateMedicineRupees(double d) throws ValidatorException{
-		if (d <= 0) {
-			throw new ValidatorException("Medicine rupees can not be zero or less than zero");
-		}
-	}
+        if (!validateMedicineUrl(medicine.getMedicineUrl())) {
+            throw new InvalidMedicineException("Medicine URL is not valid");
+        }
 
-	public static void validateId(int id) throws ValidatorException {
-		if (id <= 0) {
-			throw new ValidatorException("Id can not be zero or less than zero");
-		}
-	}
+        // Additional validations for other attributes can be added here
+        
+        return true;
+    }
 
-	public static void validateMedicineUrl(String medicineUrl) throws ValidatorException {
-		if (medicineUrl == null || "".equals(medicineUrl.trim())) {
-			throw new ValidatorException("Medicine Name cannot be null or empty");
-		}
-	}
+    public static boolean validateMedicineName(String medicineName) throws InvalidMedicineException {
+        if (medicineName == null || medicineName.trim().isEmpty()) {
+            throw new InvalidMedicineException("Invalid medicine name");
+        }
+        return true;
+    }
+
+    public static boolean validateMedicineRupees(int medicineRupees) throws InvalidMedicineException {
+        if (medicineRupees <= 0) {
+            throw new InvalidMedicineException("Invalid medicine rupees");
+        }
+        return true;
+    }
+
+    public static boolean validateMedicineUrl(String medicineUrl) throws InvalidMedicineException {
+        if (medicineUrl == null || medicineUrl.trim().isEmpty()) {
+            throw new InvalidMedicineException("Invalid medicine URL");
+        }
+
+        // Additional URL format validation logic can be added here
+        
+        return true;
+    }
+    
+    // Other validation methods for additional attributes can be added here
 }
+

@@ -16,8 +16,8 @@ public class TestUserLoginFeature {
     @Test
     public void loginSuccess() {
         UserService userService = new UserService();
-        String email = "maha122@gmail.com";
-        String password = "Navee@123";
+        String email = "abinaya17@gmail.com";
+        String password = "Ishu@145";
         User user1 = new User(email, password);
         try {
             assertTrue(userService.loginUser(user1, email));
