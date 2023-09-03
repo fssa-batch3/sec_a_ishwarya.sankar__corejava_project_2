@@ -1,5 +1,7 @@
 package com.fssa.medlife.validation;
 
+import java.util.function.BooleanSupplier;
+
 import com.fssa.medlife.model.Medicine;
 
 import exception.InvalidMedicineException;
@@ -51,6 +53,11 @@ public class MedicineValidator {
         
         return true;
     }
+
+	public static BooleanSupplier validateMedicine(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
     // Other validation methods for additional attributes can be added here
 }

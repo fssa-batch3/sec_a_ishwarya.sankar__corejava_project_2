@@ -19,38 +19,38 @@ public class MedicineDAO {
 	
 
 	// connect to database
-	public Connection getConnection() throws SQLException {
-		return ConnectionUtil.getConnection();
+public Connection getConnection() throws SQLException {
+	return ConnectionUtil.getConnection();
 	}
-
-	public static void close(Connection connection, PreparedStatement ps) throws DAOException {
-		try {
-			if (ps != null) {
-				ps.close();
-			}
-			if (connection != null) {
-				connection.close();
-			}
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
-	}
-	//checking each  for null and closing it if it's not null and throws exception
-	public static void closeAll(Connection connection, PreparedStatement ps, ResultSet rs) throws DAOException {
-		try {
-			if (rs != null) {
-				rs.close();
-			}
-			if (ps != null) {
-				ps.close();
-			}
-			if (connection != null) {
-				connection.close();
-			}
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
-	}
+//
+//	public static void close(Connection connection, PreparedStatement ps) throws DAOException {
+//		try {
+//			if (ps != null) {
+//				ps.close();
+//			}
+//			if (connection != null) {
+//				connection.close();
+//			}
+//		} catch (SQLException e) {
+//			throw new DAOException(e);
+//		}
+//	}
+//	//checking each  for null and closing it if it's not null and throws exception
+//	public static void closeAll(Connection connection, PreparedStatement ps, ResultSet rs) throws DAOException {
+//		try {
+//			if (rs != null) {
+//				rs.close();
+//			}
+//			if (ps != null) {
+//				ps.close();
+//			}
+//			if (connection != null) {
+//				connection.close();
+//			}
+//		} catch (SQLException e) {
+//			throw new DAOException(e);
+//		}
+//	}
 
 //	// add new user to DB - medicine
 //	public boolean addMedicine(Medicine medicine) throws DAOException {
@@ -107,7 +107,10 @@ public class MedicineDAO {
 	            String medicineName = rs.getString("MedicineName");
 	            int medicineRupees = rs.getInt("MedicineRupees");
 	            String medicineUrl = rs.getString("MedicineUrl");
+	            int id = rs.getInt("id");
+
 	            Medicine medicine = new Medicine(medicineName, medicineRupees, medicineUrl);
+	            medicine.setId(id);
 	            medicines.add(medicine);
 	        }
 	    } catch (SQLException e) {
@@ -116,11 +119,6 @@ public class MedicineDAO {
 
 	    return medicines;
 	}
-
-    
-
-    
-    
 	public boolean updateMedicine(Medicine medicine, int id) throws DAOException {
 	    String query = "UPDATE medicine SET MedicineName = ?, MedicineRupees = ?, MedicineUrl = ? WHERE id = ?";
 	    System.out.println("Query: " + query); // Print the query for debugging purposes
@@ -178,6 +176,47 @@ public class MedicineDAO {
 	    return false;
 	}
 
+	public Medicine findMedicineById(int id) throws DAOException {
+	    String query = "SELECT * FROM medicine WHERE MedicineId = ?";
+	    Medicine medicine = null;
+
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement pmt = connection.prepareStatement(query)) {
+	        pmt.setInt(1, id);
+
+	        try (ResultSet resultSet = pmt.executeQuery()) {
+	            if (resultSet.next()) {
+	                // Extract data from the ResultSet and create a Medicine object
+	                medicine.setId(resultSet.getInt("id"));
+	                medicine.setMedicineName(resultSet.getString("MedicineName"));
+	                medicine.setMedicineRupees(resultSet.getInt("MedicineRupees"));
+	                medicine.setMedicineUrl(resultSet.getString("MedicineUrl"));
+
+	                // You can set other fields similarly here
+
+	                // Return the Medicine object
+	                return medicine;
+	            }
+	        }
+	    } catch (SQLException e) {
+	        // Convert the SQLException to a custom DAOException and throw it
+	        throw new DAOException(e);
+	    }
+
+	    return null; // Return null if no Medicine with the specified ID was found
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 //    
 //	public void checkMedicineName(String medicineName) throws ValidatorException, DAOException {

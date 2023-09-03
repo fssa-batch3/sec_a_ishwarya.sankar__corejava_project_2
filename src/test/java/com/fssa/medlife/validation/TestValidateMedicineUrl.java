@@ -1,61 +1,65 @@
-//package com.fssa.medlife.validation;
-//
-//import static org.junit.jupiter.api.Assertions.assertTrue;
-//import static org.junit.jupiter.api.Assertions.fail;
-//
-//import org.junit.jupiter.api.Test;
-//
-//import com.fssa.medlife.exception.ValidatorException;
-//
-//public class TestValidateMedicineUrl {
-//	 @Test
-//	    void validMedicineUrl() {
-//	        try {
-//	        	MedicineValidator.validateMedicineUrl("https://www.example.com/medicine");
-//	            assertTrue(true, "Test Case Passed: Valid medicine URL");
-//	        } catch (ValidatorException e) {
-//	            fail("Test Case Failed: Valid medicine URL");
-//	        }
-//	    }
-//	 
-//
-//	    @Test
-//	    void nullMedicineUrl() {
-//	        try {
-//	        	MedicineValidator.validateMedicineUrl(null);
-//	            fail("Test Case Failed: Medicine URL is null");
-//	        } catch (ValidatorException e) {
-//	            assertTrue(e.getMessage().equals("Medicine URL cannot be null or empty"), "Test Case Passed: Medicine URL is null");
-//	        }
-//	    }
-//
-//	    @Test
-//	    void emptyMedicineUrl() {
-//	        try {
-//	        	MedicineValidator.validateMedicineUrl("");
-//	            fail("Test Case Failed: Medicine URL is empty");
-//	        } catch (ValidatorException e) {
-//	            assertTrue(e.getMessage().equals("Medicine URL cannot be null or empty"), "Test Case Passed: Medicine URL is empty");
-//	        }
-//	    }
-//
-//	    @Test
-//	    void invalidMedicineUrl() {
-//	        try {
-//	        	MedicineValidator.validateMedicineUrl("invalidurl");
-//	            fail("Test Case Failed: Invalid medicine URL format");
-//	        } catch (ValidatorException e) {
-//	            assertTrue(e.getMessage().equals("Invalid Medicine URL format"), "Test Case Passed: Invalid medicine URL format");
-//	        }
-//	    }
-//
-//	    @Test
-//	    void validMedicineUrlWithParameters() {
-//	        try {
-//	        	MedicineValidator.validateMedicineUrl("https://www.example.com/medicine?id=123");
-//	            assertTrue(true, "Test Case Passed: Valid medicine URL with parameters");
-//	        } catch (ValidatorException e) {
-//	            fail("Test Case Failed: Valid medicine URL with parameters");
-//	        }
-//	    }
-//}
+package com.fssa.medlife.validation;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import com.fssa.medlife.exception.ValidatorException;
+
+import exception.InvalidMedicineException;
+
+public class TestValidateMedicineUrl {
+	@Test
+	void validMedicineUrl() {
+	    try {
+	        assertTrue(MedicineValidator.validateMedicineUrl("https://www.example.com/medicine"));
+	        System.out.println("Valid medicine URL test passed.");
+	    } catch ( InvalidMedicineException e) {
+	        e.printStackTrace();
+	        fail("Test Case Failed: Valid medicine URL");
+	    }
+	}
+
+	@Test
+	void nullMedicineUrl() {
+	    try {
+	        assertFalse(MedicineValidator.validateMedicineUrl(null));
+	        System.out.println("Invalid null medicine URL test passed.");
+	    } catch (  InvalidMedicineException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	@Test
+	void emptyMedicineUrl() {
+	    try {
+	        assertFalse(MedicineValidator.validateMedicineUrl(""));
+	        System.out.println("Invalid empty medicine URL test passed.");
+	    } catch (  InvalidMedicineException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	@Test
+	void invalidMedicineUrl() {
+	    try {
+	        assertFalse(MedicineValidator.validateMedicineUrl("invalidurl"));
+	        System.out.println("Invalid medicine URL format test passed.");
+	    } catch (InvalidMedicineException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	@Test
+	void validMedicineUrlWithParameters() {
+	    try {
+	        assertTrue(MedicineValidator.validateMedicineUrl("https://www.example.com/medicine?id=123"));
+	        System.out.println("Valid medicine URL with parameters test passed.");
+	    } catch ( InvalidMedicineException e) {
+	        e.printStackTrace();
+	        fail("Test Case Failed: Valid medicine URL with parameters");
+	    }
+	}
+}

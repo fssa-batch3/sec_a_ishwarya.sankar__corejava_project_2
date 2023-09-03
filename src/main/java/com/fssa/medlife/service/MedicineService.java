@@ -59,24 +59,9 @@ public class MedicineService {
 //        }
 //    }
 //
-//    public Medicine findById(int id) throws ServiceException {
-//        try {
-//            MedicineValidator.validateId(id);
-//            MedicineDAO medicineDAO = new MedicineDAO();
-//            medicineDAO.checkMedicineIdExists(id);
-//            return medicineDAO.findById(id);
-//        } catch (ValidatorException | DAOException e) {
-//            throw new ServiceException(e);
-//        }
-//    }
-//
-//    public void deleteMedicine(Medicine medicineToDelete) {
-//    }
-//
-//    public Set<Medicine> findAllMedicine() {
-//        return null;
-//    }
-//}
+ 
+
+//    
 	public static boolean addMedicine(Medicine medicine) throws ServiceException {
 		   MedicineDAO medicineDAO = new MedicineDAO();
 		try {
@@ -152,6 +137,26 @@ public class MedicineService {
 		}
 	}
 	
+	public Medicine findMedicineById(int id) throws ServiceException {
+	    try {
+	        MedicineDAO medicineDAO = new MedicineDAO();
+	        Medicine medicine = medicineDAO.findMedicineById(id);
+
+	        if (medicine != null) {
+	            return medicine;
+	        } else {
+	            System.err.println("Medicine not found");
+	            return null;
+	        }
+	    } catch (DAOException e) {
+	        throw new ServiceException(e);
+	    }
+	}
+
+	
+	
+	
+
 //	public static boolean addMedicine(Medicine medicine) throws ServiceException {
 //        try {
 //            MedicineValidator.validateMedicine(medicine);

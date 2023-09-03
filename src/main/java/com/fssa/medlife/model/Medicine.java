@@ -26,8 +26,8 @@ public class Medicine {
 	public int getMedicineRupees() {
 		return MedicineRupees;
 	}
-	public void setMedicineRupees(int medicineRupees) {
-		MedicineRupees = medicineRupees;
+	public void setMedicineRupees(int i) {
+		MedicineRupees = i;
 	}
 	public String getMedicineUrl() {
 		return MedicineUrl;

@@ -15,7 +15,7 @@ class TestMedicineCreateFeature {
 	  @Test
 	    public void testAddMedicineSuccess() {
 	        MedicineService medicineService = new MedicineService();
-	        Medicine medicine = new Medicine("Paracetemal", 100, "http://example.com");
+	        Medicine medicine = new Medicine("Nilabhringadi", 100, "https://example.com");
 	        
 	        try {
 	            assertTrue(medicineService.addMedicine(medicine));
