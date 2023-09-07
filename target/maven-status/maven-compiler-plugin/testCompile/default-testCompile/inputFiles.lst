@@ -1,2 +1,14 @@
-C:\Users\IshwaryaSankar\eclipse-workspace\Medlife\src\test\java\TestRegisterFeature\TestRegister.java
-C:\Users\IshwaryaSankar\eclipse-workspace\Medlife\src\test\java\TestLoginUser\TestLogin.java
+C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\test\java\com\fssa\medlife\validation\TestValidateMedicineUrl.java
+C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\test\java\com\fssa\medlife\service\TestMedicineReadFeature.java
+C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\test\java\com\fssa\medlife\validation\TestValidateMedicineRupees.java
+C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\test\java\com\fssa\medlife\service\TestMedicineCreateFeature.java
+C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\test\java\com\fssa\medlife\validation\TestValidatePhoneNumber.java
+C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\test\java\com\fssa\medlife\validation\TestValidateUserName.java
+C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\test\java\com\fssa\medlife\validation\TestValidateEmail.java
+C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\test\java\com\fssa\medlife\service\TestUserRegisterFeature.java
+C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\test\java\com\fssa\medlife\service\TestMedicineDeleteFeature.java
+C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\test\java\com\fssa\medlife\service\TestMedicineUpdateFeature.java
+C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\test\java\com\fssa\medlife\service\TestUserLoginFeature.java
+C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\test\java\com\fssa\medlife\service\TestUserUpdateFeature.java
+C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\test\java\com\fssa\medlife\validation\TestValidatePassword.java
+C:\Users\IshwaryaSankar\eclipse-workspace\ishwarya.sankar__corejava_project_2\src\test\java\com\fssa\medlife\service\TestUserDeleteFeature.java

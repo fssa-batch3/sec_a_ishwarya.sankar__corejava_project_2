@@ -15,6 +15,7 @@ import com.fssa.medlife.model.Medicine;
 import com.fssa.medlife.utils.ConnectionUtil;
 
 
+
 public class MedicineDAO {
 	
 
@@ -22,60 +23,14 @@ public class MedicineDAO {
 public Connection getConnection() throws SQLException {
 	return ConnectionUtil.getConnection();
 	}
-//
-//	public static void close(Connection connection, PreparedStatement ps) throws DAOException {
-//		try {
-//			if (ps != null) {
-//				ps.close();
-//			}
-//			if (connection != null) {
-//				connection.close();
-//			}
-//		} catch (SQLException e) {
-//			throw new DAOException(e);
-//		}
-//	}
-//	//checking each  for null and closing it if it's not null and throws exception
-//	public static void closeAll(Connection connection, PreparedStatement ps, ResultSet rs) throws DAOException {
-//		try {
-//			if (rs != null) {
-//				rs.close();
-//			}
-//			if (ps != null) {
-//				ps.close();
-//			}
-//			if (connection != null) {
-//				connection.close();
-//			}
-//		} catch (SQLException e) {
-//			throw new DAOException(e);
-//		}
-//	}
 
-//	// add new user to DB - medicine
-//	public boolean addMedicine(Medicine medicine) throws DAOException {
-//		Connection con = null;
-//		PreparedStatement ps = null;
-//
-//		try {
-//			String query = "INSERT INTO medicine (medicine_name, medicine_rupees,medicine_url) VALUES (?, ?, ?,)";
-//			con = getConnection();
-//			ps = con.prepareStatement(query);
-//			ps.setString(1, medicine.getMedicineName());
-//			ps.setInt(2, medicine.getMedicineRupees());
-//			ps.setString(3, medicine.getMedicineUrl());
-//			ps.executeUpdate();
-//			System.out.println("Medicine has been created successfully");
-//		} catch (SQLException e) {
-//			System.out.println(e.getMessage());
-//			throw new DAOException(e);
-//		} finally {
-//			close(con,ps);
-//		}
-//		return false;
-//	}
-	
-	
+/**
+ * Adds a new medicine to the database.
+ *
+ * @param medicine The Medicine object to be added.
+ * @return true if the medicine is successfully added, false otherwise.
+ * @throws DAOException if there is an issue with the database operation.
+ */
 	 // Add new medicine to DB
 	public boolean addMedicine(Medicine medicine) throws DAOException {
 	    String query = "INSERT INTO medicine (MedicineName, MedicineRupees, MedicineUrl) VALUES (?, ?, ?)";
@@ -89,11 +44,16 @@ public Connection getConnection() throws SQLException {
 	        int rows = pmt.executeUpdate();
 	        return rows == 1;
 	    } catch (SQLException e) {
-	        // Convert the SQLException to a custom DaoException and throw it
 	        throw new DAOException(e);
 	    }
 	}
 
+	 /**
+     * Retrieves a list of all medicines from the database.
+     *
+     * @return A list of Medicine objects representing all medicines in the database.
+     * @throws DAOException if there is an issue with the database operation.
+     */
    
 	public List<Medicine> getAllMedicines() throws DAOException {
 	    List<Medicine> medicines = new ArrayList<>();
@@ -112,6 +72,7 @@ public Connection getConnection() throws SQLException {
 	            Medicine medicine = new Medicine(medicineName, medicineRupees, medicineUrl);
 	            medicine.setId(id);
 	            medicines.add(medicine);
+	            
 	        }
 	    } catch (SQLException e) {
 	        throw new DAOException(e);
@@ -119,25 +80,37 @@ public Connection getConnection() throws SQLException {
 
 	    return medicines;
 	}
+	  /**
+     * Updates an existing medicine in the database.
+     *
+     * @param medicine The updated Medicine object.
+     * @param id       The ID of the medicine to be updated.
+     * @return true if the medicine is successfully updated, false otherwise.
+     * @throws DAOException if there is an issue with the database operation.
+     */
 	public boolean updateMedicine(Medicine medicine, int id) throws DAOException {
 	    String query = "UPDATE medicine SET MedicineName = ?, MedicineRupees = ?, MedicineUrl = ? WHERE id = ?";
-	    System.out.println("Query: " + query); // Print the query for debugging purposes
-
+	    System.out.println("Query: " + query);
 	    try (Connection connection = ConnectionUtil.getConnection();
 	         PreparedStatement pmt = connection.prepareStatement(query)) {
 	        pmt.setString(1, medicine.getMedicineName());
 	        pmt.setInt(2, medicine.getMedicineRupees());
 	        pmt.setString(3, medicine.getMedicineUrl());
-	        pmt.setInt(4, id); // Set the ID parameter
+	        pmt.setInt(4, id); 
 
 	        int rows = pmt.executeUpdate();
 	        return rows == 1;
 	    } catch (SQLException e) {
-	        // Convert the SQLException to a custom DaoException and throw it
 	        throw new DAOException (e);
 	    }
 	}
-
+	 /**
+     * Deletes a medicine from the database by its ID.
+     *
+     * @param id The ID of the medicine to be deleted.
+     * @return true if the medicine is successfully deleted, false otherwise.
+     * @throws DAOException if there is an issue with the database operation.
+     */
     
 	// Delete a medicine from the DB
 	public boolean deleteMedicine(int id) throws DAOException {
@@ -150,12 +123,11 @@ public Connection getConnection() throws SQLException {
 	        int rows = pmt.executeUpdate();
 	        return rows == 1;
 	    } catch (SQLException e) {
-	        // Convert the SQLException to a custom DaoException and throw it
 	        throw new DAOException(e);
 	    }
 	}
 
-	// Check if a medicine name already exists in the DB
+	
 	public boolean isMedicineNameExists(String medicineName) throws DAOException {
 	    String query = "SELECT COUNT(*) FROM medicine WHERE MedicineName = ?";
 
@@ -170,15 +142,15 @@ public Connection getConnection() throws SQLException {
 	            }
 	        }
 	    } catch (SQLException e) {
-	        // Convert the SQLException to a custom DaoException and throw it
 	        throw new DAOException(e);
 	    }
 	    return false;
 	}
 
+	
 	public Medicine findMedicineById(int id) throws DAOException {
-	    String query = "SELECT * FROM medicine WHERE MedicineId = ?";
-	    Medicine medicine = null;
+	    String query = "SELECT * FROM medicine WHERE id = ?";
+	    Medicine medicine = new Medicine();
 
 	    try (Connection connection = ConnectionUtil.getConnection();
 	         PreparedStatement pmt = connection.prepareStatement(query)) {
@@ -202,8 +174,9 @@ public Connection getConnection() throws SQLException {
 	        // Convert the SQLException to a custom DAOException and throw it
 	        throw new DAOException(e);
 	    }
+		return medicine;
 
-	    return null; // Return null if no Medicine with the specified ID was found
+	    
 	}
 
 
@@ -340,4 +313,6 @@ public Connection getConnection() throws SQLException {
 	
 	
 	//Finally, the med object, which may contain the retrieved medicine data or be null, is returned.
+
+
 }

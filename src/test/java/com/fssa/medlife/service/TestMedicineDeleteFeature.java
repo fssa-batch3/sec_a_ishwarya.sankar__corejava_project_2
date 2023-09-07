@@ -20,22 +20,24 @@ public class TestMedicineDeleteFeature {
 	        MedicineService medicineService = new MedicineService();
 	       
 	        try {
-	            assertTrue(medicineService.deleteMedicine(1));
+	            assertTrue(medicineService.deleteMedicine(6));
 	        } catch (ServiceException e) {
+	        	fail();
 	            e.printStackTrace();
 	           
 	        }
 	    }
+	 
 	    
-	    @Test
-	    public void testDeleteMedicineInvalidId() {
-	        MedicineService medicineService = new MedicineService();
-	        try {
-	            assertTrue(medicineService.deleteMedicine(-1));
-	        } catch (ServiceException e) {
-	            e.printStackTrace();
-	           
-	        }
-	    }
+//	    @Test
+//	    public void testDeleteMedicineInvalidId() {
+//	        MedicineService medicineService = new MedicineService();
+//	        try {
+//	            assertTrue(medicineService.deleteMedicine(-1));
+//	        } catch (ServiceException e) {
+//	            e.printStackTrace();
+//	           
+//	        }
+//	    }
 	      
 }

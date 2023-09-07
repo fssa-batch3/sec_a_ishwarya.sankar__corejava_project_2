@@ -19,6 +19,7 @@ public class Doctor {
 		this.Experience = experience;
 		this.image = image;
 	}
+  
 
   public Doctor() {
 	// TODO Auto-generated constructor stub

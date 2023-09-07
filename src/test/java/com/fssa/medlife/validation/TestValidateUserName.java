@@ -13,6 +13,7 @@ public class TestValidateUserName {
 	@Test
 	 void testValidUserName() {
 		try {
+			
 			assertTrue(UserValidator.validateName("ValidUserName"));
 			System.out.println("Valid user name test passed.");
 		} catch (InvalidUserException e) {

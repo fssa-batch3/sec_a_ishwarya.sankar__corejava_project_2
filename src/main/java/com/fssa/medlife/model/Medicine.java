@@ -9,6 +9,7 @@ public class Medicine {
 	private boolean isActive;
 	private int id;
 
+	
 	@Override
 	public String toString() {
 		return "Medicine [MedicineName=" + MedicineName + ", MedicineRupees=" + MedicineRupees + ", MedicineUrl="
@@ -48,10 +49,9 @@ public class Medicine {
 		this.id = id;
 	}
 	public Medicine(String medicineName, int medicineRupees, String medicineUrl) {
-		super();
-		MedicineName = medicineName;
-		MedicineRupees = medicineRupees;
-		MedicineUrl = medicineUrl;
+		this.MedicineName = medicineName;
+		this.MedicineRupees = medicineRupees;
+		this.MedicineUrl = medicineUrl;
 	}
 	public Medicine(String medicineName, int medicineRupees, String medicineUrl, boolean isActive, int id) {
 		super();
@@ -60,6 +60,9 @@ public class Medicine {
 		MedicineUrl = medicineUrl;
 		this.isActive = isActive;
 		this.id = id;
+	}
+	public Medicine() {
+		// TODO Auto-generated constructor stub
 	}
 
 	

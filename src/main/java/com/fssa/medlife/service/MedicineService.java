@@ -16,72 +16,41 @@ import exception.InvalidMedicineException;
 
 public class MedicineService {
 
-//    public static boolean addMedicine(Medicine medicine) throws ServiceException {
-//        MedicineDAO medicineDAO = new MedicineDAO();
-//        try {
-//            MedicineValidator.validateMedicine(medicine);
-//            medicineDAO.checkMedicineName(medicine.getMedicineName());
-//            medicineDAO.addMedicine(medicine);
-//            return true;
-//        } catch (InvalidMedicineException | DAOException e) {
-//            throw new ServiceException(e);
-//        }
-//    }
-//
-//    public void updateMedicine(int id, Medicine medicine) throws ServiceException {
-//     
-//        try {
-//            MedicineValidator.validateMedicine(medicine);
-//            MedicineDAO meddao = new MedicineDAO();
-//            meddao.checkMedicineIdExists(id);
-//            meddao.updateMedicine(id, medicine);
-//        } catch (ValidatorException | DAOException e) {
-//            throw new ServiceException(e);
-//        }
-//    }
-//
-//    public static boolean deleteMedicine(int id) throws ServiceException {
-//        MedicineDAO medicineDAO = new MedicineDAO();
-//        try {
-//            MedicineValidator.validateId(id);
-//            return medicineDAO.deleteMedicine(id);
-//        } catch (ValidatorException | DAOException e) {
-//            throw new ServiceException(e);
-//        }
-//    }
-//
-//    public List<Medicine> getAll() throws ServiceException {
-//        MedicineDAO medicineDAO = new MedicineDAO();
-//        try {
-//            return medicineDAO.findAllMedicine();
-//        } catch (DAOException e) {
-//            throw new ServiceException(e);
-//        }
-//    }
-//
- 
+	/**
+    * Adds a new medicine to the database.
+    *
+    * @param medicine The Medicine object to be added.
+    * @return true if the medicine is successfully added, false otherwise.
+    * @throws ServiceException if there is an issue with the service operation.
+    */
 
 //    
 	public static boolean addMedicine(Medicine medicine) throws ServiceException {
 		   MedicineDAO medicineDAO = new MedicineDAO();
 		try {
-			MedicineValidator.validateMedicine(medicine);// Validate the product using ProductValidator
-			// Check if the product creation in the DAO was successful
+			MedicineValidator.validateMedicine(medicine);
 			if (medicineDAO.addMedicine(medicine)) {
 				return true;
+				
 			} else {
 				System.err.println("Creating failed");
+				
 				return false; 
 			}
-			// Catch exceptions related to invalid products or DAO issues and throw a
-			// ServiceException
-
+			
 		} catch (InvalidMedicineException | DAOException e) {
 
 			throw new ServiceException(e);
 		}
 
 	}
+	/**
+     * Retrieves a list of all medicines from the database.
+     *
+     * @return A list of Medicine objects representing all medicines in the database.
+     * @throws ServiceException if there is an issue with the service operation.
+     */
+	
 	
 	//get all
 	public List<Medicine> getAllMedicine() throws ServiceException {
@@ -96,12 +65,19 @@ public class MedicineService {
 		}
 
 	}
+	   /**
+     * Updates an existing medicine in the database.
+     *
+     * @param medicine The updated Medicine object.
+     * @param id       The ID of the medicine to be updated.
+     * @return true if the medicine is successfully updated, false otherwise.
+     * @throws ServiceException if there is an issue with the service operation.
+     */
 //update 
 	public boolean updateMedicine(Medicine medicine,int id) throws ServiceException {
 		MedicineDAO medicineDAO = new MedicineDAO();
 		try {
-			MedicineValidator.validateMedicine(medicine);// Validate the product using ProductValidator
-			// Check if the product update in the DAO was successful and provide feedback
+			MedicineValidator.validateMedicine(medicine);
 			if (medicineDAO.updateMedicine(medicine,id)) {
 				
 				return true;
@@ -110,19 +86,24 @@ public class MedicineService {
 				return false;
 			}
 
-			// Catch exceptions related to invalid products or DAO issues and throw a
-			// ServiceException
+			
 		} catch (InvalidMedicineException | DAOException e) {
 
 			throw new ServiceException(e);
 		}
 	}
+	  /**
+     * Deletes a medicine from the database by its ID.
+     *
+     * @param id The ID of the medicine to be deleted.
+     * @return true if the medicine is successfully deleted, false otherwise.
+     * @throws ServiceException if there is an issue with the service operation.
+     */
 	
 	// delete
 	public boolean deleteMedicine(int id) throws ServiceException {
 		MedicineDAO medicineDAO = new MedicineDAO();
 		try {
-			// Check if the product deletion in the DAO was successful and provide feedback
 			if (medicineDAO.deleteMedicine(id)) {
 				return true;
 			} else {
@@ -132,8 +113,7 @@ public class MedicineService {
 
 		} catch (DAOException e) {
 
-			throw new ServiceException (e);// Catch exceptions related to DAO issues and throw a
-															// ServiceException
+			throw new ServiceException (e);
 		}
 	}
 	
@@ -154,49 +134,6 @@ public class MedicineService {
 	}
 
 	
-	
-	
-
-//	public static boolean addMedicine(Medicine medicine) throws ServiceException {
-//        try {
-//            MedicineValidator.validateMedicine(medicine);
-//            MedicineDAO medicineDAO = new MedicineDAO();
-//            return medicineDAO.addMedicine(medicine);
-//        } catch (InvalidMedicineException | SQLException e) {
-//            throw new ServiceException(e);
-//        }
-//    }
-
-//	public List<Medicine> getAllMedicine() throws ServiceException {
-//        try {
-//        	 MedicineDAO medicineDAO = new MedicineDAO();
-//             return medicineDAO.getAllMedicines();
-//        } catch (SQLException e) {
-//            throw new ServiceException(e);
-//        }
-//    }
-    
-//    public  boolean updateMedicine(Medicine medicine,int id) throws ServiceException {
-//        try {
-//        	MedicineValidator.validateMedicine(medicine); // Use the instance you created
-//        	  MedicineDAO medicineDAO = new MedicineDAO();
-//            return medicineDAO.updateMedicine(medicine,id);
-//        } catch (InvalidMedicineException | SQLException e) {
-//            throw new ServiceException(e);
-//        }
-//    } 
-
-  
-//    public boolean deleteMedicine(int id) throws ServiceException {
-//        try {
-//        	MedicineDAO medicineDAO = new MedicineDAO();
-//            return medicineDAO.deleteMedicine(id);
-//        } catch (SQLException e) {
-//            throw new ServiceException(e);
-//        }
-//    }
-
-
 	
 	
 }

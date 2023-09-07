@@ -1,34 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: com.fssa.medlife.service.TestMedicineUpdateFeature
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.148 s <<< FAILURE! - in com.fssa.medlife.service.TestMedicineUpdateFeature
-testUpdateMedicine  Time elapsed: 0.089 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: Unexpected exception thrown: com.fssa.medlife.exception.DAOException: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`backend`.`medicine`, CONSTRAINT `medicine_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`userId`))
-	at com.fssa.medlife.service.TestMedicineUpdateFeature.testUpdateMedicine(TestMedicineUpdateFeature.java:22)
-Caused by: com.fssa.medlife.exception.DAOException: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`backend`.`medicine`, CONSTRAINT `medicine_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`userId`))
-	at com.fssa.medlife.service.TestMedicineUpdateFeature.lambda$testUpdateMedicine$0(TestMedicineUpdateFeature.java:23)
-	at com.fssa.medlife.service.TestMedicineUpdateFeature.testUpdateMedicine(TestMedicineUpdateFeature.java:22)
-Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`backend`.`medicine`, CONSTRAINT `medicine_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`userId`))
-	at com.fssa.medlife.service.TestMedicineUpdateFeature.lambda$testUpdateMedicine$0(TestMedicineUpdateFeature.java:23)
-	at com.fssa.medlife.service.TestMedicineUpdateFeature.testUpdateMedicine(TestMedicineUpdateFeature.java:22)
+Tests run: 3, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.078 s <<< FAILURE! - in com.fssa.medlife.service.TestMedicineUpdateFeature
+testUpdateMedicine  Time elapsed: 0.036 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at com.fssa.medlife.service.TestMedicineUpdateFeature.testUpdateMedicine(TestMedicineUpdateFeature.java:23)
 
-testUpdateMedicineWithInvalidInput  Time elapsed: 0.002 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: Unexpected exception type thrown ==> expected: <com.fssa.medlife.exception.ValidatorException> but was: <com.fssa.medlife.service.exception.ServiceException>
-	at com.fssa.medlife.service.TestMedicineUpdateFeature.testUpdateMedicineWithInvalidInput(TestMedicineUpdateFeature.java:48)
-Caused by: com.fssa.medlife.service.exception.ServiceException: com.fssa.medlife.exception.ValidatorException: Medicine Name cannot be null or empty
-	at com.fssa.medlife.service.TestMedicineUpdateFeature.lambda$testUpdateMedicineWithInvalidInput$2(TestMedicineUpdateFeature.java:49)
-	at com.fssa.medlife.service.TestMedicineUpdateFeature.testUpdateMedicineWithInvalidInput(TestMedicineUpdateFeature.java:48)
-Caused by: com.fssa.medlife.exception.ValidatorException: Medicine Name cannot be null or empty
-	at com.fssa.medlife.service.TestMedicineUpdateFeature.lambda$testUpdateMedicineWithInvalidInput$2(TestMedicineUpdateFeature.java:49)
-	at com.fssa.medlife.service.TestMedicineUpdateFeature.testUpdateMedicineWithInvalidInput(TestMedicineUpdateFeature.java:48)
-
-testUpdateMedicineWithValidInput  Time elapsed: 0.056 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: Unexpected exception thrown: com.fssa.medlife.exception.DAOException: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`backend`.`medicine`, CONSTRAINT `medicine_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`userId`))
-	at com.fssa.medlife.service.TestMedicineUpdateFeature.testUpdateMedicineWithValidInput(TestMedicineUpdateFeature.java:37)
-Caused by: com.fssa.medlife.exception.DAOException: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`backend`.`medicine`, CONSTRAINT `medicine_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`userId`))
-	at com.fssa.medlife.service.TestMedicineUpdateFeature.lambda$testUpdateMedicineWithValidInput$1(TestMedicineUpdateFeature.java:38)
-	at com.fssa.medlife.service.TestMedicineUpdateFeature.testUpdateMedicineWithValidInput(TestMedicineUpdateFeature.java:37)
-Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`backend`.`medicine`, CONSTRAINT `medicine_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`userId`))
-	at com.fssa.medlife.service.TestMedicineUpdateFeature.lambda$testUpdateMedicineWithValidInput$1(TestMedicineUpdateFeature.java:38)
-	at com.fssa.medlife.service.TestMedicineUpdateFeature.testUpdateMedicineWithValidInput(TestMedicineUpdateFeature.java:37)
+testUpdateMedicineInvalidData  Time elapsed: 0.01 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+	at com.fssa.medlife.service.TestMedicineUpdateFeature.testUpdateMedicineInvalidData(TestMedicineUpdateFeature.java:56)
 

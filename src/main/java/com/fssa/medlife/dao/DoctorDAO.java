@@ -15,15 +15,18 @@ import com.fssa.medlife.model.Medicine;
 public class DoctorDAO {
 	
 	// connect to database
+	
 	public Connection getConnection() throws SQLException {
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/backend", "root", "123456");
 		return connection;
 	}
 
+	
 	public static void close(Connection connection, PreparedStatement ps) throws DAOException {
 		try {
 			if (ps != null) {
 				ps.close();
+				
 			}
 			if (connection != null) {
 				connection.close();
@@ -32,7 +35,6 @@ public class DoctorDAO {
 			throw new DAOException(e);
 		}
 	}
-	//checking each  for null and closing it if it's not null and throws exception
 	public static void closeAll(Connection connection, PreparedStatement ps, ResultSet rs) throws DAOException {
 		try {
 			if (rs != null) {
@@ -50,8 +52,6 @@ public class DoctorDAO {
 	}
 	
 	
-	
-//create doctor
 	public void CreateDoctor(Doctor doctor) throws DAOException {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -76,7 +76,6 @@ public class DoctorDAO {
 	}
 	
 	
-	//read doctor
 	
 	public List<Doctor> listDoctors() throws DAOException {
 	    List<Doctor> doctors = new ArrayList<>();

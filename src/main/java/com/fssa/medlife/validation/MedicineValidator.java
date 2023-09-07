@@ -1,3 +1,4 @@
+
 package com.fssa.medlife.validation;
 
 import java.util.function.BooleanSupplier;
@@ -5,6 +6,7 @@ import java.util.function.BooleanSupplier;
 import com.fssa.medlife.model.Medicine;
 
 import exception.InvalidMedicineException;
+
 
 public class MedicineValidator {
 	
@@ -24,8 +26,8 @@ public class MedicineValidator {
         if (!validateMedicineUrl(medicine.getMedicineUrl())) {
             throw new InvalidMedicineException("Medicine URL is not valid");
         }
+        
 
-        // Additional validations for other attributes can be added here
         
         return true;
     }
@@ -48,17 +50,13 @@ public class MedicineValidator {
         if (medicineUrl == null || medicineUrl.trim().isEmpty()) {
             throw new InvalidMedicineException("Invalid medicine URL");
         }
-
-        // Additional URL format validation logic can be added here
         
         return true;
     }
 
 	public static BooleanSupplier validateMedicine(String string) {
-		// TODO Auto-generated method stub
 		return null;
 	}
     
-    // Other validation methods for additional attributes can be added here
 }
 

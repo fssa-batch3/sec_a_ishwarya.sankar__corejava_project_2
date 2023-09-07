@@ -1,0 +1,14 @@
+com\fssa\medlife\validation\TestValidateMedicineRupees.class
+com\fssa\medlife\validation\TestValidateMedicineUrl.class
+com\fssa\medlife\service\TestMedicineCreateFeature.class
+com\fssa\medlife\service\TestUserRegisterFeature.class
+com\fssa\medlife\service\TestUserLoginFeature.class
+com\fssa\medlife\service\TestMedicineUpdateFeature.class
+com\fssa\medlife\validation\TestValidateEmail.class
+com\fssa\medlife\service\TestMedicineReadFeature.class
+com\fssa\medlife\validation\TestValidatePassword.class
+com\fssa\medlife\service\TestMedicineDeleteFeature.class
+com\fssa\medlife\service\TestUserUpdateFeature.class
+com\fssa\medlife\service\TestUserDeleteFeature.class
+com\fssa\medlife\validation\TestValidatePhoneNumber.class
+com\fssa\medlife\validation\TestValidateUserName.class

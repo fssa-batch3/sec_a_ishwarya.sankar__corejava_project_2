@@ -31,6 +31,7 @@ public class TestValidatePassword {
 	            e.printStackTrace();
 	        }
 	    }
+	    
 
 	    @Test
 	     void testInvalidPasswordWithoutSpecialCharacters() {
