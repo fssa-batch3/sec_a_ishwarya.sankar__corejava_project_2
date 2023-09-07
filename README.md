@@ -111,7 +111,7 @@ G --> I
 ## Introduction
 
 ### Purpose
-The purpose of this application is to know more details about the hospital and book the appointment with doctor and also they can buy medicine through line.
+The purpose of this application is to know more details about the hospital and book the appointment with doctor and also they can buy medicine through online.
 
 ### Features
 
