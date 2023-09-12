@@ -12,6 +12,7 @@ public class User {
 
 	
 	
+	
 	public int getUserId() {
 		return UserId;
 	}

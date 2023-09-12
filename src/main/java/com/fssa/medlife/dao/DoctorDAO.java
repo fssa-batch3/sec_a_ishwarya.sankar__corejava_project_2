@@ -22,6 +22,7 @@ public class DoctorDAO {
 	}
 
 	
+	
 	public static void close(Connection connection, PreparedStatement ps) throws DAOException {
 		try {
 			if (ps != null) {

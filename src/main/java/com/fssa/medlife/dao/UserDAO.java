@@ -1,17 +1,17 @@
 package com.fssa.medlife.dao;
 
 import java.sql.Connection;
-
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.fssa.medlife.exception.DAOException;
 import com.fssa.medlife.model.User;
-import com.fssa.medlife.service.*;
+import com.fssa.medlife.service.exception.ServiceException;
 import com.fssa.medlife.utils.ConnectionUtil;
 
 public class UserDAO {
+	
 	
    
 	public boolean register(User user) throws SQLException {
@@ -32,7 +32,9 @@ public class UserDAO {
 	    }
 	}
 	
+	
 
+	
 	public boolean isEmailExists(String email) throws SQLException {
 	    String query = "SELECT * FROM user WHERE email = ?";
 	    
@@ -123,5 +125,38 @@ public class UserDAO {
 	    }
 	}
 
-	
+	 /**
+     * Get a user by their email address.
+     *
+     * @param email The email address of the user to retrieve.
+     * @return The User object if found, or null if not found.
+     * @throws ServiceException If a database error occurs.
+     */
+    public User getUserByEmail(String email) throws DAOException {
+        String query = "SELECT * FROM user WHERE email = ?";
+        User user = new User();
+
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                // Create a User object with the retrieved data
+                user.setUserId(resultSet.getInt("UserId"));
+                user.setUsername(resultSet.getString("userName"));
+                user.setPassword(resultSet.getString("password"));
+                user.setPhonenumber(resultSet.getString("phone_number"));
+                user.setType(resultSet.getString("type"));
+
+        
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Error fetching user by email: " + e.getMessage());
+        }
+
+        return user;
+    }
 }
+	
+

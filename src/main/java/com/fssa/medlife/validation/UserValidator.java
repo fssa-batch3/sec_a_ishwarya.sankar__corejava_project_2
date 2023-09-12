@@ -13,11 +13,13 @@ public class UserValidator {
 	        validateName(user.getUsername()) &&
 	        validatePassword(user.getPassword()) &&
 	        validateEmail(user.getEmail()) &&
+	        
 	        validatePhoneNumber(user.getPhonenumber())) {
 	        return true; 
 	    } else {
 	        throw new InvalidUserException("User details not valid"); 
 	    }
+	    
 	}
 
 	public static boolean validateUserID(int userID) throws InvalidUserException {

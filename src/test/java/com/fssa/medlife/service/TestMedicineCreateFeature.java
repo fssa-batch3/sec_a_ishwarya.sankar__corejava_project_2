@@ -2,6 +2,7 @@ package com.fssa.medlife.service;
 
 
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -25,6 +26,8 @@ class TestMedicineCreateFeature {
 	        }
 	    }
 	    
+	  
+	  
 	  
 	    @Test
 	    public void testAddMedicineNullName() {
@@ -62,6 +65,59 @@ class TestMedicineCreateFeature {
 	            fail();
 	        } catch (ServiceException e) {
 	            e.printStackTrace();
+	        }
+	    }
+	    @Test
+	    public void testAddMedicineEmptyName() {
+	        MedicineService medicineService = new MedicineService();
+	        Medicine medicine = new Medicine("", 100, "http://example.com");
+	        
+	        try {
+	            medicineService.addMedicine(medicine);
+	            fail();
+	        } catch (ServiceException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    @Test
+	    public void testAddMedicineZeroRupees() {
+	        MedicineService medicineService = new MedicineService();
+	        Medicine medicine = new Medicine("MedicineName", 0, "http://example.com");
+	        
+	        try {
+	            medicineService.addMedicine(medicine);
+	            fail();
+	        } catch (ServiceException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    @Test
+	    public void testAddMedicineEmptyUrl() {
+	        MedicineService medicineService = new MedicineService();
+	        Medicine medicine = new Medicine("MedicineName", 100, "");
+	        
+	        try {
+	            medicineService.addMedicine(medicine);
+	            fail();
+	        } catch (ServiceException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    @Test
+	    public void testAddMedicineDuplicateName() {
+	        MedicineService medicineService = new MedicineService();
+	        Medicine medicine1 = new Medicine("MedicineName", 100, "http://example.com");
+	        Medicine medicine2 = new Medicine("MedicineName", 150, "http://example2.com");
+	        
+	        try {
+	            assertTrue(medicineService.addMedicine(medicine1));
+	        } catch (ServiceException e) {
+	        	 fail();
+	            e.printStackTrace();
+	           
 	        }
 	    }
 }

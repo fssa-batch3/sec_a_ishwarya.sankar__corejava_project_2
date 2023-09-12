@@ -41,8 +41,10 @@ public class MedicineService {
 		} catch (InvalidMedicineException | DAOException e) {
 
 			throw new ServiceException(e);
+			
 		}
 
+		
 	}
 	/**
      * Retrieves a list of all medicines from the database.

@@ -24,6 +24,7 @@ public Connection getConnection() throws SQLException {
 	return ConnectionUtil.getConnection();
 	}
 
+
 /**
  * Adds a new medicine to the database.
  *
@@ -45,6 +46,8 @@ public Connection getConnection() throws SQLException {
 	        return rows == 1;
 	    } catch (SQLException e) {
 	        throw new DAOException(e);
+	        
+	        
 	    }
 	}
 
@@ -179,140 +182,10 @@ public Connection getConnection() throws SQLException {
 	    
 	}
 
+	
+	}
+	
+	
+	
+	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//    
-//	public void checkMedicineName(String medicineName) throws ValidatorException, DAOException {
-//		Connection con = null;
-//		PreparedStatement ps = null;
-//		ResultSet rs = null;
-//		try {
-//			String query = "SELECT* FROM medicine WHERE medicine_name = ?";
-//			con = getConnection();
-//			ps = con.prepareStatement(query);
-//			ps.setString(1, medicineName);
-//			rs = ps.executeQuery();
-//			if (rs.next()) {
-//				throw new ValidatorException("Medicine already exists");
-//			}
-//
-//		} catch (SQLException e) {
-//			System.out.println(e.getMessage());
-//			throw new DAOException(e);
-//		} finally {
-//			closeAll(con,ps, rs);
-//		}
-//	}
-//	
-//
-//	public void updateMedicine(int id, Medicine medicine) throws DAOException {
-//		Connection con = null;
-//		PreparedStatement ps = null;
-//
-//		try {
-//			String query = "UPDATE medicine SET medicine_name = ?, medicine_rupees = ?, medicine_url = ? WHERE id = ?";
-//			con = getConnection();
-//			ps = con.prepareStatement(query);
-//			ps.setString(1, medicine.getMedicineName());
-//			ps.setInt(2, medicine.getMedicineRupees());
-//			ps.setString(4, medicine.getMedicineUrl());
-//			ps.setInt(5, id);
-//			ps.executeUpdate();
-//			System.out.println("Medicine has been updated successfully");
-//		} catch (SQLException e) {
-//			System.out.println(e.getMessage());
-//			throw new DAOException(e);
-//		} finally {
-//			close(con,ps);
-//		}
-//	}
-//	public void checkMedicineIdExists(int id) throws ValidatorException, DAOException {
-//		Connection con = null;
-//		PreparedStatement ps = null;
-//		ResultSet rs = null;
-//		try {
-//			String query = "SELECT id FROM medicine WHERE id = ?";
-//			con = getConnection();
-//			ps = con.prepareStatement(query);
-//			ps.setInt(1, id);
-//			rs = ps.executeQuery();
-//			if (!rs.next()) {
-//				throw new ValidatorException("Medicine Id doesn't exists");
-//			}
-//
-//		} catch (SQLException e) {
-//			System.out.println(e.getMessage());
-//			throw new DAOException(e);
-//		} finally {
-//			closeAll(con,ps, rs);
-//		}
-//	}
-//	
-//	public boolean deleteMedicine(int id) throws DAOException {
-//		Connection con = null;
-//		PreparedStatement ps = null;
-//		
-//		try {
-//			String query = "UPDATE medicine SET is_deleted=1 WHERE id=?";
-//			con = getConnection();
-//			ps = con.prepareStatement(query);
-//			ps.setInt(1, id);
-//			int rows = ps.executeUpdate();
-//			return (rows == 1);
-//		} catch (SQLException e) {
-//			System.out.println(e.getMessage());
-//			throw new DAOException(e);
-//		} finally {
-//			close(con,ps);
-//		}
-//	}
-//	
-//	public List<Medicine> findAllMedicine() throws DAOException{
-//		Connection conn = null;
-//		PreparedStatement ps = null;
-//		ResultSet rs = null;
-//		List<Medicine> medicineList = new ArrayList<>();
-//		try {
-//			String query = "SELECT * FROM medicine";
-//			conn = getConnection();
-//			ps = conn.prepareStatement(query);
-//			rs = ps.executeQuery();
-//			while (rs.next()) {
-//				Medicine med = new Medicine();
-//				med.setId(rs.getInt("id"));
-//				med.setMedicineName(rs.getString("medicine_name"));
-//				med.setMedicineRupees(rs.getInt("medicine_rupees"));
-//				med.setMedicineUrl(rs.getString("medicine_url"));
-//				med.setUserID(rs.getInt("user_id"));
-//				medicineList.add(med);
-//			}
-//		} catch (SQLException e) {
-//			System.out.println(e.getMessage());
-//			throw new DAOException(e);
-//		} finally {
-//			closeAll(conn, ps, rs);
-//		}
-//		return medicineList;
-//	}
-//
-//	public Medicine findById(int id) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//	
-	
-	
-	//Finally, the med object, which may contain the retrieved medicine data or be null, is returned.
-
-
-}
