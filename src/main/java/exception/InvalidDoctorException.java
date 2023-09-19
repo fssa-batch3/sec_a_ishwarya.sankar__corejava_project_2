@@ -2,10 +2,11 @@ package exception;
 
 public class InvalidDoctorException extends Exception{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	public InvalidDoctorException(String msg) {
+		super(msg);
+	}
 
-
+	public InvalidDoctorException(Throwable e) {
+		super(e);
+	}
 }

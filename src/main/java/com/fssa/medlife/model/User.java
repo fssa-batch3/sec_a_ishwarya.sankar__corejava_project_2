@@ -18,7 +18,7 @@ public class User {
 	}
 
 	public void setUserId(int userId) {
-		UserId = userId;
+		this.UserId = userId;
 	}
 
 	public User() {
@@ -59,6 +59,10 @@ public class User {
 
 	public User(int userid2, String email2, String username2, String password2, String phoneNumber2, String type2,
 			int deleted) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public User(String email2, String password2, String userType) {
 		// TODO Auto-generated constructor stub
 	}
 

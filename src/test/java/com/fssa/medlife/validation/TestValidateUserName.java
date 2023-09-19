@@ -9,12 +9,12 @@ import org.junit.jupiter.api.Test;
 import exception.InvalidUserException;
 
 public class TestValidateUserName {
-
+	UserValidator userValidator = new UserValidator();
 	@Test
 	 void testValidUserName() {
 		try {
 			
-			assertTrue(UserValidator.validateName("ValidUserName"));
+			assertTrue(userValidator.validateName("ValidUserName"));
 			System.out.println("Valid user name test passed.");
 		} catch (InvalidUserException e) {
 			e.printStackTrace();
@@ -25,7 +25,7 @@ public class TestValidateUserName {
 	@Test
 	 void testInvalidUserNameStartingWithNumber() {
 		try {
-			assertFalse(UserValidator.validateName("123InvalidUserName"));
+			assertFalse(userValidator.validateName("123InvalidUserName"));
 			System.out.println("Invalid user name starting with a number test passed.");
 			fail();
 		} catch (InvalidUserException e) {
@@ -36,7 +36,7 @@ public class TestValidateUserName {
 	@Test
 	 void testInvalidUserNameShorterLength() {
 		try {
-			assertFalse(UserValidator.validateName("Ab"));
+			assertFalse(userValidator.validateName("Ab"));
 			System.out.println("Invalid user name shorter length test passed.");
 			fail();
 		} catch (InvalidUserException e) {
@@ -47,7 +47,7 @@ public class TestValidateUserName {
 	@Test
 	 void testInvalidUserNameLongerLength() {
 		try {
-			assertFalse(UserValidator.validateName("ThisIsAVeryLongUserNameThatExceedsTheLimit"));
+			assertFalse(userValidator.validateName("ThisIsAVeryLongUserNameThatExceedsTheLimit"));
 			System.out.println("Invalid user name longer length test passed.");
 			fail();
 		} catch (InvalidUserException e) {
@@ -58,7 +58,7 @@ public class TestValidateUserName {
 	@Test
 	 void testInvalidUserNameWithSpaces() {
 		try {
-			assertFalse(UserValidator.validateName("Invalid User Name"));
+			assertFalse(userValidator.validateName("Invalid User Name"));
 			System.out.println("Invalid user name with spaces test passed.");
 			fail();
 		} catch (InvalidUserException e) {
@@ -70,7 +70,7 @@ public class TestValidateUserName {
 	@Test
 	 void testInvalidUserNameWithSpecialCharacters() {
 		try {
-			assertFalse(UserValidator.validateName("Invalid$UserName"));
+			assertFalse(userValidator.validateName("Invalid$UserName"));
 			System.out.println("Invalid user name with special characters test passed.");
 			fail();
 		} catch (InvalidUserException e) {
