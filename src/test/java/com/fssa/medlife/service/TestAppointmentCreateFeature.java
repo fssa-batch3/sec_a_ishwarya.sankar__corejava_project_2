@@ -16,20 +16,25 @@ class TestAppointmentCreateFeature {
 
 	@Test
 	void testCreateAppointmentSuccess() {
-		AppointmentService appointmentService = new AppointmentService();
-		User user = new User();
-		user.setUserId(25);
-		Doctor doctor = new Doctor();
-		doctor.setId(3);
+	    AppointmentService appointmentService = new AppointmentService();
+	    User user = new User();
+	    user.setUserId(27);
+	    Doctor doctor = new Doctor();
+	    doctor.setId(1);
+	    LocalDate appointmentDate = LocalDate.parse("2023-09-23");
+	    LocalDate bookingDate = LocalDate.parse("2023-09-20");
+	    System.out.println(appointmentDate);
+	    System.out.println(bookingDate);
 
-		Appointment appointment = new Appointment(user, doctor, LocalDate.parse("2023-09-16"),
-				LocalDate.parse("2023-09-17"), "Confirmed");
+	    Appointment appointment = new Appointment(user, doctor, appointmentDate, bookingDate, "pending");
+	    System.out.println(appointment);
 
-		try {
-			assertTrue(appointmentService.createAppointment(appointment));
-		} catch (ServiceException e) {
-			e.printStackTrace();
-			fail("Failed to create an appointment");
-		}
+	    try {
+	        assertTrue(appointmentService.createAppointment(appointment));
+	    } catch (ServiceException e) {
+	        e.printStackTrace();
+	        fail("Failed to create an appointment");
+	    }
 	}
+
 }

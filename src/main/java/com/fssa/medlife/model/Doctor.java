@@ -9,33 +9,48 @@ public class Doctor {
 	  private int Experience;
 	  private String image;
 	  private int id;
+	  private int userId;
 	
 	
-	  public Doctor(String specialist, String startTime, String endtime, int experience, String image, int id,
-			String doctorname) {
-		super();
-		this.specialist = specialist;
-		StartTime = startTime;
-		Endtime = endtime;
-		Experience = experience;
-		this.image = image;
-		this.id = id;
-		this.doctorname = doctorname;
+	  public int getUserId() {
+		return userId;
 	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	
+	public Doctor(String doctorname, String specialist, String startTime, String endTime, int experience, String image, int userId) {
+	    this.doctorname = doctorname;
+	    this.specialist = specialist;
+	    this.StartTime = startTime;
+	    this.Endtime = endTime;
+	    this.Experience = experience;
+	    this.image = image;
+	    this.userId = userId;
+	}
+
+	
 	  public Doctor() {
 		// TODO Auto-generated constructor stub
 	}
 
 	
 	
-	public Doctor(String doctorname, String specialist, String StartTime, String Endtime, int Experience, String image) {
-	    this.doctorname = doctorname;
-	    this.specialist = specialist;
-	    this.StartTime = StartTime;
-	    this.Endtime = Endtime;
-	    this.Experience = Experience;
-	    this.image = image;
+	
+	
+	
+	public Doctor(String doctorname, String specialist, String startTime, String endtime, int experience, String image) {
+		super();
+		this.doctorname = doctorname;
+		this.specialist = specialist;
+		StartTime = startTime;
+		Endtime = endtime;
+		Experience = experience;
+		this.image = image;
+		this.id = id;
+		this.userId = userId;
 	}
+	
 	@Override
 	public String toString() {
 		return "Doctor [doctorname=" + doctorname + ", specialist=" + specialist + ", StartTime=" + StartTime

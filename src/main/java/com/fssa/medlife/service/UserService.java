@@ -112,6 +112,17 @@ public class UserService {
 		}
 	}
 	
+	// In your UserService class
+	public String getUsernameByUserId(int userId) throws ServiceException {
+	    try {
+	        UserDAO userDAO = new UserDAO();
+	        return userDAO.getUsernameByUserId(userId);
+	    } catch (SQLException e) {
+	        throw new ServiceException("Failed to retrieve username by user ID");
+	    }
+	}
+
+	
 	  public List<Appointment> getAppointmentsForUser(int userId) throws ServiceException {
 		  UserDAO userDAO = new UserDAO();
 	        try {

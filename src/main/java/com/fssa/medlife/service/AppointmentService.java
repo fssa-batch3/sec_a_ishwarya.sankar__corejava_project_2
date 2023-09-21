@@ -14,27 +14,36 @@ import exception.InvalidUserException;
 public class AppointmentService {
 
 	  private AppointmentValidator appointmentValidator = new AppointmentValidator();
+	  public boolean createAppointment(Appointment appointment) throws ServiceException {
+		    AppointmentDAO appointmentDAO = new AppointmentDAO();
+		    try {
+		        appointmentValidator.validateAppointment(appointment);
+		        if (appointmentDAO.createAppointment(appointment)) {
+		            return true;
+		        } else {
+		            System.err.println("Creating appointment failed");
+		            return false;
+		        }
+		    } catch (InvalidAppointmentException | DAOException e) {
+		        throw new ServiceException(e);
+		    }
+		}
 
-	    public boolean createAppointment(Appointment appointment) throws ServiceException {
-	        AppointmentDAO appointmentDAO = new AppointmentDAO();
-	        try {
-	            appointmentValidator.validateAppointment(appointment);
-	            if (appointmentDAO.createAppointment(appointment)) {
-	                return true;
-	            } else {
-	                System.err.println("Creating appointment failed");
-	                return false;
-	            }
-	        } catch (InvalidAppointmentException | DAOException e) {
-	            throw new ServiceException(e);
-	        }
-	    }
 	    public List<Appointment> getAllUserAppointments(int userId) throws ServiceException {
 	        try {
 		        AppointmentDAO appointmentDAO = new AppointmentDAO();
 	            return appointmentDAO.getAllUserAppointments(userId);
 	        } catch (DAOException e) {
 	            throw new ServiceException("Failed to retrieve user appointments");
+	        }
+	    }
+	    
+	    public List<Appointment> getAllDoctorAppointments(int doctorId) throws ServiceException {
+	        try {
+	            AppointmentDAO appointmentDAO = new AppointmentDAO();
+	            return appointmentDAO.getAllDoctorAppointments(doctorId);
+	        } catch (DAOException e) {
+	            throw new ServiceException("Failed to retrieve doctor appointments");
 	        }
 	    }
 

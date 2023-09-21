@@ -15,22 +15,27 @@ import com.fssa.medlife.model.User;
 import com.fssa.medlife.utils.ConnectionUtil;
 
 public class AppointmentDAO {
-
 	public boolean createAppointment(Appointment appointment) throws DAOException {
-		String insertQuery = "INSERT INTO appointments (user_id, doc_id, appointment_date, booking_date, status) VALUES (?, ?, ?, ?, ?)";
-		try (Connection connection = ConnectionUtil.getConnection();
-				PreparedStatement pst = connection.prepareStatement(insertQuery)) {
-			pst.setInt(1, appointment.getUser().getUserId());
-			pst.setInt(2, appointment.getDoctor().getId());
-			pst.setDate(3, Date.valueOf(appointment.getAppointmentDate()));
-			pst.setDate(4, Date.valueOf(appointment.getBookingDate().toString()));
-			pst.setString(5, appointment.getStatus());
-			int rows = pst.executeUpdate();
-			return (rows > 0);
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
+	    String insertQuery = "INSERT INTO appointments (user_id, doc_id, appointment_date, booking_date, Status) VALUES (?, ?, ?, ?, ?)";
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement pst = connection.prepareStatement(insertQuery)) {
+	        pst.setInt(1, appointment.getUser().getUserId());
+	        pst.setInt(2, appointment.getDoctor().getId());
+	        
+	        pst.setDate(3, java.sql.Date.valueOf(appointment.getAppointmentDate()));
+	        
+	        // Convert LocalDate to java.sql.Date for 'booking_date'
+	        pst.setDate(4, java.sql.Date.valueOf(appointment.getBookingDate()));
+	        
+	        pst.setString(5, appointment.getStatus());
+	        
+	        int rows = pst.executeUpdate();
+	        return (rows > 0);
+	    } catch (SQLException e) {
+	        throw new DAOException(e);
+	    }
 	}
+
 
 	public List<Appointment> getAllAppointments() throws DAOException {
 		List<Appointment> appointments = new ArrayList<>();
@@ -53,7 +58,7 @@ public class AppointmentDAO {
 				doctor.setDoctorname(rs.getString("doctor_name"));
 				doctor.setSpecialist(rs.getString("specialist"));
 				doctor.setStartTime(rs.getString("start_time"));
-				doctor.setEndtime(rs.getString("end_time"));
+				doctor.setEndtime(rs.getString("End_Time"));
 				doctor.setExperience(rs.getInt("experience"));
 				doctor.setImage(rs.getString("image"));
 
@@ -74,10 +79,20 @@ public class AppointmentDAO {
 
 	public List<Appointment> getAllDoctorAppointments(int doctorId) throws DAOException {
 		List<Appointment> appointments = new ArrayList<>();
-		String query = "SELECT " + "    appointments.id," + "    appointments.appointment_date," + "    doctor.*,"
-				+ "    user.* " + " FROM " + "    appointments " + " INNER JOIN "
-				+ "    doctor ON appointments.doctor_id = doctor.id " + " INNER JOIN "
-				+ "    user ON appointments.user_id = user.user_id " + " WHERE " + "    doctor.id = ?";
+		String query = "SELECT "
+				+ " appointments.id as appointmentId,"
+				+ "    appointments.appointment_date,"
+				+ "    doctor.*,"
+				+ "    user.*"
+				+ "FROM"
+				+ "    appointments"
+				+ "INNER JOIN"
+				+ "    doctor ON appointments.doc_id = doctor.id"
+				+ "INNER JOIN\r\n"
+				+ "    user ON appointments.user_id = user.userId"
+				+ "WHERE\r\n"
+				+ "    appointments.id = ?;"
+				+ "";
 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pmt = connection.prepareStatement(query)) {
@@ -91,11 +106,11 @@ public class AppointmentDAO {
 					Doctor doctor = new Doctor();
 
 					user.setUserId(rs.getInt("user_id"));
-					doctor.setId(rs.getInt("doc_id"));
-					doctor.setDoctorname(rs.getString("doctorname"));
+					doctor.setId(rs.getInt("id"));
+					doctor.setDoctorname(rs.getString("doctor_name"));
 					doctor.setSpecialist(rs.getString("specialist"));
-					doctor.setStartTime(rs.getString("StartTime"));
-					doctor.setEndtime(rs.getString("Endtime"));
+					doctor.setStartTime(rs.getString("start_time"));
+					doctor.setEndtime(rs.getString("End_Time"));
 					doctor.setExperience(rs.getInt("Experience"));
 					doctor.setImage(rs.getString("image"));
 
@@ -137,10 +152,10 @@ public class AppointmentDAO {
 					user.setUserId(rs.getInt("userId"));
 
 					doctor.setId(rs.getInt("id"));
-					doctor.setDoctorname(rs.getString("doctorname"));
+					doctor.setDoctorname(rs.getString("doctor_name"));
 					doctor.setSpecialist(rs.getString("specialist"));
-					doctor.setStartTime(rs.getString("StartTime"));
-					doctor.setEndtime(rs.getString("Endtime"));
+					doctor.setStartTime(rs.getString("start_time"));
+					doctor.setEndtime(rs.getString("end_time"));
 					doctor.setExperience(rs.getInt("Experience"));
 					doctor.setImage(rs.getString("image"));
 

@@ -3,11 +3,15 @@ package com.fssa.medlife.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.fssa.medlife.dao.AppointmentDAO;
 import com.fssa.medlife.dao.DoctorDAO;
 import com.fssa.medlife.exception.DAOException;
 import com.fssa.medlife.model.Appointment;
 import com.fssa.medlife.model.Doctor;
 import com.fssa.medlife.service.exception.ServiceException;
+import com.fssa.medlife.validation.DoctorValidator;
+
+import exception.InvalidDoctorException;
 
 public class DoctorService {
 	
@@ -21,6 +25,15 @@ public class DoctorService {
 	        }
 	    }
 
+	    
+	    public List<Appointment> getAllUserAppointments(int doctorId) throws ServiceException {
+	        try {
+		        AppointmentDAO appointmentDAO = new AppointmentDAO();
+	            return appointmentDAO.getAllUserAppointments(doctorId);
+	        } catch (DAOException e) {
+	            throw new ServiceException("Failed to retrieve user appointments");
+	        }
+	    }
 	    public List<Doctor> getAllDoctors() throws ServiceException, ClassNotFoundException {
 	        try {
 	            DoctorDAO doctorDAO = new DoctorDAO();
@@ -30,11 +43,12 @@ public class DoctorService {
 	        }
 	    }
 
-	    public boolean updateDoctor(Doctor doctor) throws ServiceException, ClassNotFoundException {
+	    public boolean updateDoctor(Doctor doctor, int id) throws ServiceException {
 	        try {
-	            DoctorDAO doctorDAO = new DoctorDAO();
-	            return doctorDAO.updateDoctor(doctor);
-	        } catch (SQLException e) {
+	            DoctorValidator.validateDoctor(doctor);
+	            DoctorDAO doctorDao = new DoctorDAO();
+	            return doctorDao.updateDoctor(doctor, id); // Pass the id parameter
+	        } catch (InvalidDoctorException | DAOException  e) {
 	            throw new ServiceException(e);
 	        }
 	    }
@@ -47,6 +61,17 @@ public class DoctorService {
 	            throw new ServiceException(e);
 	        }
 	    }
+	    
+	    public Doctor findDoctorById(int id) throws ServiceException {
+	        try {
+	            DoctorDAO doctorDAO = new DoctorDAO();
+
+	            return doctorDAO.findDoctorById(id);
+	        } catch (DAOException e) {
+	            throw new ServiceException("Error finding doctor by ID");
+	        }
+	    }
+	    
 	    public List<Appointment> getAppointmentsForDoctor(int id) throws ServiceException {
 	        DoctorDAO doctorDAO = new DoctorDAO();
 	        try {
@@ -55,4 +80,7 @@ public class DoctorService {
 	            throw new ServiceException("Failed to retrieve doctor appointments");
 	        }
 	    }
+	    
+
+	
 }
