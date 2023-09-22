@@ -24,7 +24,7 @@ public class DoctorDAO {
     	
     	
         int rows = 0;
-        String query = "INSERT INTO doctor (doctor_name, specialist, start_time, end_time, Experience, image) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO doctor (doctor_name, specialist, start_time, end_time, Experience, image,userId,doc_email) VALUES (?, ?, ?, ?, ?, ?,?,?)";
         try (Connection connection =ConnectionUtil.getConnection();
              PreparedStatement pmt = connection.prepareStatement(query)) {
 
@@ -34,6 +34,8 @@ public class DoctorDAO {
             pmt.setString(4, doctor.getEndtime());
             pmt.setInt(5, doctor.getExperience());
             pmt.setString(6, doctor.getImage());
+            pmt.setInt(7,doctor.getUserId());
+            pmt.setString(8,doctor.getEmail());
 
             rows = pmt.executeUpdate();
         }
@@ -59,8 +61,11 @@ catch(SQLException e){
                 String endTime = rs.getString("end_time");
                 int experience = rs.getInt("Experience");
                 String image = rs.getString("image");
+                int id = rs.getInt("id");
                 Doctor doctor = new Doctor(doctorName, specialist, startTime, endTime, experience, image);
+                doctor.setId(id);
                 doctors.add(doctor);
+                
             }
         }
 
@@ -102,22 +107,50 @@ catch(SQLException e){
         }
     }
     
+    public List<Doctor> searchDoctorsByName(String name) throws DAOException {
+        List<Doctor> doctors = new ArrayList<>();
+        String query = "SELECT * FROM doctor WHERE doctor_name LIKE ?";
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement pmt = connection.prepareStatement(query)) {
+            pmt.setString(1, "%" + name + "%"); // Use the '%' wildcard to match any part of the name
+            try (ResultSet resultSet = pmt.executeQuery()) {
+                while (resultSet.next()) {
+                    Doctor doctor = new Doctor();
+                    doctor.setId(resultSet.getInt("id"));
+                    doctor.setDoctorname(resultSet.getString("doctor_name"));
+                    doctor.setSpecialist(resultSet.getString("specialist"));
+                    doctor.setStartTime(resultSet.getString("start_time"));
+                    doctor.setEndtime(resultSet.getString("end_time"));
+                    doctor.setExperience(resultSet.getInt("Experience"));
+                    doctor.setImage(resultSet.getString("image"));
+                    doctors.add(doctor);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+        return doctors;
+    }
+
+    
     
     public Doctor findDoctorById(int id) throws DAOException {
-        Doctor doctor = null;
         String query = "SELECT * FROM doctor WHERE id = ?";
+        Doctor doctor = null;
+
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pmt = connection.prepareStatement(query)) {
 
             pmt.setInt(1, id);
+
             try (ResultSet resultSet = pmt.executeQuery()) {
                 if (resultSet.next()) {
                     doctor = new Doctor();
                     doctor.setId(resultSet.getInt("id"));
                     doctor.setDoctorname(resultSet.getString("doctor_name"));
                     doctor.setSpecialist(resultSet.getString("specialist"));
-                    doctor.setStartTime(resultSet.getString("StartTime"));
-                    doctor.setEndtime(resultSet.getString("Endtime"));
+                    doctor.setStartTime(resultSet.getString("start_Time"));
+                    doctor.setEndtime(resultSet.getString("End_time"));
                     doctor.setExperience(resultSet.getInt("Experience"));
                     doctor.setImage(resultSet.getString("image"));
                 }
@@ -125,6 +158,7 @@ catch(SQLException e){
         } catch (SQLException e) {
             throw new DAOException(e);
         }
+
         return doctor;
     }
 
@@ -158,7 +192,7 @@ catch(SQLException e){
 	}
 	
 	 public Doctor getDoctorByEmail(String email) throws DAOException {
-	        String query = "SELECT * FROM doctor WHERE email = ?"; // Replace 'email' with the actual column name for email in your database
+	        String query = "SELECT * FROM doctor WHERE doc_email = ?"; // Replace 'email' with the actual column name for email in your database
 
 	        try (Connection connection = ConnectionUtil.getConnection();
 	             PreparedStatement pmt = connection.prepareStatement(query)) {
@@ -167,10 +201,10 @@ catch(SQLException e){
 	            try (ResultSet rs = pmt.executeQuery()) {
 	                if (rs.next()) {
 	                    int id = rs.getInt("id");
-	                    String doctorname = rs.getString("doctorname");
+	                    String doctorname = rs.getString("doctor_name");
 	                    String specialist = rs.getString("specialist");
-	                    String startTime = rs.getString("StartTime");
-	                    String endTime = rs.getString("Endtime");
+	                    String startTime = rs.getString("start_time");
+	                    String endTime = rs.getString("end_time");
 	                    int experience = rs.getInt("Experience");
 	                    String image = rs.getString("image");
 

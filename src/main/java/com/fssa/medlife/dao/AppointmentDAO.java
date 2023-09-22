@@ -24,7 +24,6 @@ public class AppointmentDAO {
 	        
 	        pst.setDate(3, java.sql.Date.valueOf(appointment.getAppointmentDate()));
 	        
-	        // Convert LocalDate to java.sql.Date for 'booking_date'
 	        pst.setDate(4, java.sql.Date.valueOf(appointment.getBookingDate()));
 	        
 	        pst.setString(5, appointment.getStatus());
@@ -88,9 +87,9 @@ public class AppointmentDAO {
 				+ "    appointments"
 				+ "INNER JOIN"
 				+ "    doctor ON appointments.doc_id = doctor.id"
-				+ "INNER JOIN\r\n"
+				+ "INNER JOIN"
 				+ "    user ON appointments.user_id = user.userId"
-				+ "WHERE\r\n"
+				+ "WHERE"
 				+ "    appointments.id = ?;"
 				+ "";
 
@@ -122,6 +121,7 @@ public class AppointmentDAO {
 					appointment.setStatus(rs.getString("status"));
 
 					appointments.add(appointment);
+					System.out.println(appointment);
 				}
 			}
 		} catch (SQLException e) {
@@ -241,4 +241,29 @@ public class AppointmentDAO {
 		}
 	}
 
+	public List<Appointment> getAllDocAppointment(int docId) throws DAOException {
+	 String sql = "SELECT * FROM appointments WHERE doc_id = ?";
+	 List<Appointment> list = new ArrayList<>();
+	 try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement pst = connection.prepareStatement(sql)) {
+     pst.setInt(1, docId);
+     
+     ResultSet resultSet = pst.executeQuery();
+     
+     while (resultSet.next()) {
+    	 Appointment appointment = new Appointment(); 
+    	 appointment.setId(resultSet.getInt("id"));
+    	 appointment.setUser_id(resultSet.getInt("user_id"));
+    	 appointment.setDoc_id( resultSet.getInt("doc_id"));
+    	 appointment.setAppointmentDate(resultSet.getString("appointment_date"));
+    	 appointment.setBookingDate(resultSet.getString("booking_date"));
+    	 appointment.setStatus(resultSet.getString("Status"));
+    	 list.add(appointment);
+     }
+	 
+ } catch (SQLException e) {
+     e.printStackTrace();
+ }
+	return list;
+}
 }

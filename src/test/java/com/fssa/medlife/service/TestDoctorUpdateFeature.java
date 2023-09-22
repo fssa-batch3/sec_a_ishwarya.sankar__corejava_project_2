@@ -16,7 +16,7 @@ import com.fssa.medlife.service.exception.ServiceException;
 	 @Test
 	 void testUpdateDoctor() {
 	     DoctorService doctorService = new DoctorService();
-	     Doctor doctor = new Doctor("Chandruraj", "nephrologist", "09.00 AM", "05.00 PM", 10, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZeEzeqSeG5MwgQd6_tq3q66w-XrYcZ8lZZA&usqp=CAU");
+	     Doctor doctor = new Doctor("Chandruraj", "nephrologist", "09.00", "05.00", 10, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZeEzeqSeG5MwgQd6_tq3q66w-XrYcZ8lZZA&usqp=CAU");
 
 	     try {
 	         boolean updateResult = doctorService.updateDoctor(doctor, 1);

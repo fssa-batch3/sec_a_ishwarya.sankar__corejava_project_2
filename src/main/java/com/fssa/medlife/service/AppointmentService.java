@@ -9,10 +9,12 @@ import com.fssa.medlife.service.exception.ServiceException;
 import com.fssa.medlife.validation.AppointmentValidator;
 
 import exception.InvalidAppointmentException;
-import exception.InvalidUserException;
 
 public class AppointmentService {
 
+	public AppointmentService() {
+		
+	}
 	  private AppointmentValidator appointmentValidator = new AppointmentValidator();
 	  public boolean createAppointment(Appointment appointment) throws ServiceException {
 		    AppointmentDAO appointmentDAO = new AppointmentDAO();

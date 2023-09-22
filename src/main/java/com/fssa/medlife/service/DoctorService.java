@@ -62,16 +62,23 @@ public class DoctorService {
 	        }
 	    }
 	    
-	    public Doctor findDoctorById(int id) throws ServiceException {
+	    public List<Doctor> searchDoctorsByName(String name) throws ServiceException {
 	        try {
 	            DoctorDAO doctorDAO = new DoctorDAO();
-
-	            return doctorDAO.findDoctorById(id);
+	            return doctorDAO.searchDoctorsByName(name);
 	        } catch (DAOException e) {
-	            throw new ServiceException("Error finding doctor by ID");
+	            throw new ServiceException(e);
 	        }
 	    }
-	    
+
+	    public Doctor findDoctorById(int id) throws ServiceException {
+	        DoctorDAO doctorDAO = new DoctorDAO();
+	        try {
+	            return doctorDAO.findDoctorById(id);
+	        } catch (DAOException e) {
+	            throw new ServiceException(e.getMessage());
+	        }
+	    }
 	    public List<Appointment> getAppointmentsForDoctor(int id) throws ServiceException {
 	        DoctorDAO doctorDAO = new DoctorDAO();
 	        try {

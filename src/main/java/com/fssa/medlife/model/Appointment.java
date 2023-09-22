@@ -14,6 +14,10 @@ public class Appointment {
 	private  LocalDate  appointmentDate;
 	private  LocalDate bookingDate;
 	private  String status;
+	private int doc_id;
+	private int id;
+	private int user_id;
+	
 	
 
 	
@@ -62,6 +66,42 @@ public class Appointment {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+
+
+	public int getDoc_id() {
+		return doc_id;
+	}
+
+
+
+	public void setDoc_id(int doc_id) {
+		this.doc_id = doc_id;
+	}
+
+
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

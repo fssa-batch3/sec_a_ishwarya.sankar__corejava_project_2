@@ -121,7 +121,7 @@ public class UserDAO {
 	public boolean updateUser(User user) throws SQLException {
 		// Define the SQL query to update the 'username' and 'phonenumber' columns for a
 		// user based on email
-		String query = "UPDATE USER SET username=?, phonenumber=? WHERE email=?";
+		String query = "UPDATE USER SET userName=?, phone_number=? WHERE email=?";
 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pmt = connection.prepareStatement(query)) {
@@ -188,6 +188,27 @@ public class UserDAO {
 		return user;
 	}
 	
+	 public List<User> getAllUsers() throws SQLException, ClassNotFoundException {
+	        List<User> users = new ArrayList<>();
+
+	        String query = "SELECT * FROM user";
+	        try (Connection connection = ConnectionUtil.getConnection();
+	             PreparedStatement pmt = connection.prepareStatement(query);
+	             ResultSet rs = pmt.executeQuery()) {
+
+	            while (rs.next()) {
+	            	User user = new User();
+	            	user.setUserId( rs.getInt("userId"));
+	                user.setEmail( rs.getString("email"));
+	                user.setUsername( rs.getString("userName"));
+	                user.setPassword( rs.getString("password"));
+	                user.setPhonenumber(rs.getString("phone_number"));
+	                user.setType( rs.getString("type"));
+	                users.add(user);
+	            }
+	        }
+	        return users;
+	        }
 	public List<Appointment> getAppointmentsForUser(int userId) throws DAOException {
 	    List<Appointment> appointments = new ArrayList<>();
 	    String query = "SELECT * FROM appointments WHERE user_id = ?";

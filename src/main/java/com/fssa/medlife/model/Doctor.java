@@ -10,6 +10,7 @@ public class Doctor {
 	  private String image;
 	  private int id;
 	  private int userId;
+	  private String email;
 	
 	
 	  public int getUserId() {
@@ -72,15 +73,18 @@ public class Doctor {
 	public String getStartTime() {
 		return StartTime;
 	}
-	public void setStartTime(String startTime) {
-		StartTime = startTime;
-	}
+	
 	public String getEndtime() {
 		return Endtime;
 	}
-	public void setEndtime(String endtime) {
-		Endtime = endtime;
+	public void setStartTime(String startTime) {
+	    this.StartTime = startTime;
 	}
+
+	public void setEndtime(String endtime) {
+	    this.Endtime = endtime;
+	}
+
 	public int getExperience() {
 		return Experience;
 	}
@@ -98,6 +102,12 @@ public class Doctor {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 

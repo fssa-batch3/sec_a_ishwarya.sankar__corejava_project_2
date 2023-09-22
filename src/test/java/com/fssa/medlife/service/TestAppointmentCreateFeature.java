@@ -18,11 +18,11 @@ class TestAppointmentCreateFeature {
 	void testCreateAppointmentSuccess() {
 	    AppointmentService appointmentService = new AppointmentService();
 	    User user = new User();
-	    user.setUserId(27);
+	    user.setUserId(25);
 	    Doctor doctor = new Doctor();
 	    doctor.setId(1);
-	    LocalDate appointmentDate = LocalDate.parse("2023-09-23");
-	    LocalDate bookingDate = LocalDate.parse("2023-09-20");
+	    LocalDate appointmentDate = LocalDate.parse("2023-09-28");
+	    LocalDate bookingDate = LocalDate.parse("2023-09-22");
 	    System.out.println(appointmentDate);
 	    System.out.println(bookingDate);
 
