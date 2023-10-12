@@ -3,6 +3,7 @@ package com.fssa.medlife.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.fssa.medlife.dao.DetailsDAO;
 import com.fssa.medlife.dao.UserDAO;
 import com.fssa.medlife.exception.DAOException;
 import com.fssa.medlife.model.Appointment;
@@ -131,5 +132,40 @@ public class UserService {
 	            throw new ServiceException("Error retrieving appointments for user");
 	        }
 	    }
+
+	  public User findUserById(int userId) throws ServiceException {
+			try {
+				
+				 UserDAO userDAO = new UserDAO();
+				return userDAO.FindUserByUserId(userId);
+			} catch (SQLException e) {
+				throw new ServiceException(e);
+			}
+		}
+	  
+	  
+	  
+	  public static void main(String[] args) {
+		    try {
+		        int userIdToFind = 30; // Replace with the desired userId to find
+
+		        UserDAO userDAO = new UserDAO();
+		        User foundUser = userDAO.FindUserByUserId(userIdToFind);
+
+		        if (foundUser != null) {
+		            System.out.println("User found:");
+		            System.out.println("User ID: " + foundUser.getUserId());
+		            System.out.println("Username: " + foundUser.getUsername());
+		            System.out.println("Email: " + foundUser.getEmail());
+		            System.out.println("Type: " + foundUser.getType());
+		            System.out.println("Phone Number: " + foundUser.getPhonenumber());
+		        } else {
+		            System.out.println("User not found for userId: " + userIdToFind);
+		        }
+		    } catch ( SQLException e) {
+		        System.err.println("Error: " + e.getMessage());
+		        e.printStackTrace();
+		    }
+		}
 
 }

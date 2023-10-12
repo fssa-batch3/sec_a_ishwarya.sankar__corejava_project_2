@@ -3,9 +3,19 @@ package com.fssa.medlife.model;
 public class Doctordetails {
 	
 	
+
+
 	private int license ;
 	private String certification;
 	private String qualification;
+	private String userName;
+	private User user;
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
 	private String specialist;
 	private int Experience;
 	private String image;
@@ -76,6 +86,18 @@ public class Doctordetails {
 	    this.Experience = experience;
 	    this.image = image;
 	    this.userId = userId;
+	}
+
+	public Doctordetails() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	

@@ -239,8 +239,35 @@ public class UserDAO {
 	}
 
 
+	
+	public User FindUserByUserId(int userId) throws SQLException {
+	    String query = "SELECT * FROM user WHERE userId = ?";
+	    User user = null;
+
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement pmt = connection.prepareStatement(query)) {
+
+	        pmt.setInt(1, userId);
+
+	        try (ResultSet rs = pmt.executeQuery()) {
+	            if (rs.next()) {
+	                user = new User();
+	                user.setUserId(rs.getInt("userId"));
+	                user.setUsername(rs.getString("userName"));
+	                user.setEmail(rs.getString("email"));
+	                user.setPassword(rs.getString("password"));
+	                user.setType(rs.getString("type"));
+	                user.setPhonenumber(rs.getString("phone_number"));
+	            }
+	        }
+	    }
+
+	    return user;
+	}
+
+	
+	
+
+	}
 
 
-
-
-}
