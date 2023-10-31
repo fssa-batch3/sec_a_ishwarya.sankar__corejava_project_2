@@ -1,49 +1,45 @@
-Online Hospital Appointment Booking System(MEDLIFE)
-Author: Ishwarya
+# Online Hospital Appointment Booking System (MEDLIFE)
 
-Overview
+**Author**: Ishwarya
+
+## Overview
+
 This project aims to streamline the process of booking appointments at a local hospital in my village. To address the issue of long queues, I've developed a web-based system using HTML, CSS, JavaScript, SQL, and Java. This system allows users to book appointments online, view hospital information, and schedule appointments with doctors.
 
-Features
-Home Page: After logging in, users are directed to the home page where they can learn more about the hospital.
+## Features
 
-About Page: This page provides details about the hospital, its history, and founding information.
+- **Home Page**: After logging in, users are directed to the home page where they can learn more about the hospital.
 
-Service Page: Users can explore the types of services available at the hospital.
+- **About Page**: This page provides details about the hospital, its history, and founding information.
 
-Expert Page: Users can book appointments with doctors through this page.
+- **Service Page**: Users can explore the types of services available at the hospital.
 
-Profile Page: View and update your profile details and check your appointment history.
+- **Expert Page**: Users can book appointments with doctors through this page.
 
-User Flow
-Login: Users start by logging into the system.
+- **Profile Page**: View and update your profile details and check your appointment history.
 
-Home Page: Upon successful login, they are taken to the home page.
+## User Flow
 
-About Page: Users can explore the hospital's history and founding information.
+1. **Login**: Users start by logging into the system.
 
-Service Page: Learn about the services provided by the hospital.
+2. **Home Page**: Upon successful login, they are taken to the home page.
 
-Expert Page: Schedule appointments with doctors.
+3. **About Page**: Users can explore the hospital's history and founding information.
 
-Profile Page: Manage profile details and view appointment history.
+4. **Service Page**: Learn about the services provided by the hospital.
 
-How to Use
-Clone the Repository: Clone this repository to your local machine using git clone.
+5. **Expert Page**: Schedule appointments with doctors.
 
-Database Setup: Set up your SQL database to store user and appointment information.
+6. **Profile Page**: Manage profile details and view appointment history.
 
-Configuration: Update the configuration files to connect to your database.
+## Dependencies
 
-Deployment: Deploy the website to a web server or use a local server for testing.
+- HTML
+- CSS
+- JavaScript
+- Java
+- SQL
 
-Dependencies
-HTML
-CSS
-JavaScript
-Java
-SQL
-Contribution
 #MEDLIFE
 Milestones	(https://github.com/fssa-batch3/sec_a_ishwarya.sankar__corejava_project_2/milestones)
 
