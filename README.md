@@ -1,4 +1,49 @@
+Online Hospital Appointment Booking System(MEDLIFE)
+Author: Ishwarya
 
+Overview
+This project aims to streamline the process of booking appointments at a local hospital in my village. To address the issue of long queues, I've developed a web-based system using HTML, CSS, JavaScript, SQL, and Java. This system allows users to book appointments online, view hospital information, and schedule appointments with doctors.
+
+Features
+Home Page: After logging in, users are directed to the home page where they can learn more about the hospital.
+
+About Page: This page provides details about the hospital, its history, and founding information.
+
+Service Page: Users can explore the types of services available at the hospital.
+
+Expert Page: Users can book appointments with doctors through this page.
+
+Profile Page: View and update your profile details and check your appointment history.
+
+User Flow
+Login: Users start by logging into the system.
+
+Home Page: Upon successful login, they are taken to the home page.
+
+About Page: Users can explore the hospital's history and founding information.
+
+Service Page: Learn about the services provided by the hospital.
+
+Expert Page: Schedule appointments with doctors.
+
+Profile Page: Manage profile details and view appointment history.
+
+How to Use
+Clone the Repository: Clone this repository to your local machine using git clone.
+
+Database Setup: Set up your SQL database to store user and appointment information.
+
+Configuration: Update the configuration files to connect to your database.
+
+Deployment: Deploy the website to a web server or use a local server for testing.
+
+Dependencies
+HTML
+CSS
+JavaScript
+Java
+SQL
+Contribution
 #MEDLIFE
 Milestones	(https://github.com/fssa-batch3/sec_a_ishwarya.sankar__corejava_project_2/milestones)
 
